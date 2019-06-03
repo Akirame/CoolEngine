@@ -16,7 +16,7 @@ std::vector<ModelData> ModelImporter::LoadMesh(const std::string& Filename)
 	// Release the previously loaded mesh (if it exists)
 	Assimp::Importer Importer;
 
-	const aiScene* pScene = Importer.ReadFile(Filename.c_str(), aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
+	const aiScene* pScene = Importer.ReadFile(Filename.c_str(), aiProcess_Triangulate | aiProcess_FlipUVs );
 	return GetModelData(pScene, Filename);
 }
 
@@ -35,7 +35,6 @@ std::vector<ModelData> ModelImporter::GetModelData(const aiScene* pScene, const 
 ModelData ModelImporter::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 {
 	const aiVector3D Zero3D(0.0f, 0.0f, 0.0f);	
-	int n = paiMesh->mNumFaces;
 	std::vector<float> vertexData;
 	std::vector<float> uVData;
 	std::vector<unsigned int> indexes;

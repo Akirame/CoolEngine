@@ -13,9 +13,9 @@ Shape3D::Shape3D(Renderer* _renderer, string modelPath) :
 	{
 		mesh = models[i];
 
-		mesh.bufferVertex = SetVertices(&mesh.position[i], mesh.position.size());
-		mesh.bufferIndex  = SetIndexes(&mesh.indexes[i], mesh.indexes.size());
-		mesh.bufferUV     = SetVerticesUV(&mesh.uv[i], mesh.uv.size());
+		mesh.bufferVertex = SetVertices(&mesh.position[0], mesh.position.size());
+		mesh.bufferIndex  = SetIndexes(&mesh.indexes[0], mesh.indexes.size());
+		mesh.bufferUV     = SetVerticesUV(&mesh.uv[0], mesh.uv.size());
 		models[i] = mesh;
 	}
 }
@@ -34,11 +34,13 @@ unsigned int Shape3D::SetVertices(float* _vertices, int count)
 void Shape3D::SetTexture(const char * imagepath)
 {
 	texture = TextureImporter::loadBMP_custom(imagepath);
-	heightTotal = TextureImporter::dataStruct.height;
-	widthTotal = TextureImporter::dataStruct.width;
 }
 unsigned int Shape3D::SetVerticesUV(float* vertices,int count)
 {
+	for (int i = 0; i < count; i++)
+	{
+		vertices[i] = vertices[i];
+	}
 	return (renderer->GenBuffer(vertices, count * sizeof(float)));
 }
 unsigned int Shape3D::SetIndexes(unsigned int* _indexes, int count)
@@ -66,6 +68,9 @@ void Shape3D::Draw()
 		renderer->BindMeshBuffer(models[i].bufferIndex);
 		renderer->DrawIndexBuffer(models[i].indexes.size());
 	}
+
+
+
 	renderer->DisableBuffer(0);
 	renderer->DisableBuffer(1);
 }
