@@ -1,0 +1,37 @@
+#pragma once
+#include "Material.h"
+#include "ModelImporter.h"
+#include "Definitions.h"
+#include "TextureImporter.h"
+#include "Component.h"
+#include "Renderer.h"
+#include "EntityNode.h"
+
+class ENGINEDLL_API Mesh :
+	public Component
+{
+public:
+	Mesh(Renderer* _renderer, EntityNode* entity, const char* modelPath);
+	~Mesh();
+	void Draw();
+	virtual void SetMaterial(Material* _material);
+	void Dispose();
+	void BindMaterial();
+	void SetTexture(const char * imagepath);	
+protected:
+	std::vector<ModelData> models;
+	Material* material;
+	Renderer* renderer;
+	unsigned int bufferData;
+	unsigned int bufferColor;
+	unsigned int bufferIndex;
+	unsigned int programID;
+	float* vertices;
+	float* verticesUVArray;
+	ModelData mesh;
+	unsigned int verticesUV;
+	unsigned int* indexes;
+	bool shouldDispose;
+	unsigned int texture;
+};
+
