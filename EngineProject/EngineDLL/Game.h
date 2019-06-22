@@ -11,6 +11,7 @@
 #include "Mesh.h"
 #include "Tilemap.h"
 #include "Camera.h"
+#include "Scene.h"
 using namespace std;
 
 class Game : public GameBase
@@ -19,16 +20,7 @@ protected:
 	bool OnStart() override;
 	bool OnStop() override;
 	bool OnUpdate(float deltaTime) override;
-	int loopCount;
-	Mesh* square;	
-	Triangle* triangle;
-	Circle* circle;
-	Material* mat;
-	Player* player;
-	Tilemap* tilemap;
-	Camera* camera;
-	float* coord;
-	float conta;	
+	Scene* m_scene;
 public:
 	Game(int _screenHeight, int _screenWidht, string _screenName);
 	~Game();
