@@ -3,6 +3,7 @@
 #include "Renderer.h"
 #include "Window.h"
 #include <iostream>
+#include "Camera.h"
 class ENGINEDLL_API GameBase
 {
 private:
@@ -15,6 +16,7 @@ protected:
 	string screenName;
 	Window* window;
 	Renderer* renderer;
+	Camera* camera;
 public:
 	GameBase(int _screenWidht, int _screenHeight,string _screenName);
 	virtual ~GameBase();

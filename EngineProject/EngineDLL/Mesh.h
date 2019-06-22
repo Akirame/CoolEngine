@@ -1,11 +1,13 @@
 #pragma once
-#include "Material.h"
 #include "ModelImporter.h"
 #include "Definitions.h"
 #include "TextureImporter.h"
 #include "Component.h"
-#include "Renderer.h"
-#include "EntityNode.h"
+
+
+class Renderer;
+class Material;
+class EntityNode;
 
 class ENGINEDLL_API Mesh :
 	public Component

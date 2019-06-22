@@ -24,6 +24,7 @@ bool GameBase::Start()
 	{
 		return false;
 	}
+	camera = new Camera(renderer);
 	return OnStart();
 }
 bool GameBase::Stop()

@@ -4,10 +4,10 @@
 
 class ENGINEDLL_API EntityNode : public SceneNode {
 protected:
-	Renderer * m_renderer;
+	Renderer * renderer;
 
 public:
-	EntityNode(Renderer* renderer);
+	EntityNode(Renderer* _renderer);
 	~EntityNode();
 
 	void Update(float deltaTime) override;

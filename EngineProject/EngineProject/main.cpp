@@ -1,17 +1,16 @@
+#include <iostream>
 #include "Game.h"
 #include <iostream>
-#include "TextureImporter.h"
 int main()
 {
-	Game* game = new Game(800,600,"Test");
+	Game* game = new Game(640, 480, "Insert cool window name");
 
-	if (game->Start())
-	{				
-		game->Loop();		
-	}		
+	if (game->Start()) {
+		game->Loop();
+	}
 	game->Stop();
-	std::cin.get();
-	std::cin.get();
-	delete game;	
+
+	cin.get();
+	delete game;
 	return 0;
 }

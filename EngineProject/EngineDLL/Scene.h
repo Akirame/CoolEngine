@@ -1,6 +1,6 @@
 #pragma once
 #include "Exports.h"
-#include "Entity.h"
+#include "EntityNode.h"
 #include "Mesh.h"
 #include "Renderer.h"
 #include "Camera.h"

@@ -145,4 +145,8 @@ void Camera::UpdateModelMatrix()
 
 	renderer->SetViewMatrix(glm::vec3(pos), finalForward, targetUp);
 }
+void Camera::SetPosition(const glm::vec3& worldPos) {
+	translate = glm::translate(glm::mat4(1.0f), glm::vec3(worldPos));
+	UpdateModelMatrix();
+}
 

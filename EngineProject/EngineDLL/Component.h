@@ -1,6 +1,7 @@
 #pragma once
 #include "Exports.h"
-#include "EntityNode.h"
+
+class EntityNode;
 
 enum ComponentType {
 	DEFAULT,

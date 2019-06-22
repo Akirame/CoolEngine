@@ -2,8 +2,8 @@
 #include "Exports.h"
 #include "Component.h"
 #include <list>
-#include "Transform.h"
 
+class Transform;
 enum ComponentType;
 
 class ENGINEDLL_API SceneNode {

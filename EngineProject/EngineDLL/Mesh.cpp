@@ -1,4 +1,8 @@
 #include "Mesh.h"
+#include "Renderer.h"
+#include "EntityNode.h"
+#include "Material.h"
+#include "Transform.h"
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 
@@ -30,7 +34,7 @@ void Mesh::SetTexture(const char * imagepath)
 }
 void Mesh::Draw()
 {
-	renderer->SetModelMatrix(m_entity->GetTransform()->GetModelMatrix());	
+	renderer->SetModelMatrix(m_entity->GetTransform()->GetModelMatrix());			
 	if (material)
 	{
 		BindMaterial();

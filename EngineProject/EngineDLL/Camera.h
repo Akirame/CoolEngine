@@ -1,4 +1,4 @@
-#include "Renderer.h"
+#pragma once
 #include "Entity.h"
 #include "Exports.h"
 #include "Window.h"
@@ -35,5 +35,6 @@ public:
 	void SetRotateY(float y);
 	void SetRotateZ(float z);
 	void UpdateModelMatrix();
+	void SetPosition(const glm::vec3& worldPos);
 };
 
