@@ -7,7 +7,7 @@
 #include <glm\gtc\matrix_transform.hpp>
 
 
-Mesh::Mesh(Renderer* _renderer, EntityNode* entity, const char* modelPath) :
+Mesh::Mesh(EntityNode* entity, Renderer* _renderer, const char* modelPath) :
 	Component(entity) 
 {
 	SetType(ComponentType::MESH);
@@ -71,4 +71,8 @@ void Mesh::SetMaterial(Material* _material)
 void Mesh::BindMaterial()
 {
 	renderer->BindMaterial(programID);
+}
+
+void Mesh::Update(float deltaTime) {
+	Draw();
 }

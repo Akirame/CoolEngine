@@ -3,7 +3,7 @@
 #include <iostream>
 int main()
 {
-	Game* game = new Game(640, 480, "Insert cool window name");
+	Game* game = new Game(640, 480, "window");
 
 	if (game->Start()) {
 		game->Loop();

@@ -13,13 +13,14 @@ class ENGINEDLL_API Mesh :
 	public Component
 {
 public:
-	Mesh(Renderer* _renderer, EntityNode* entity, const char* modelPath);
+	Mesh(EntityNode* entity, Renderer* _renderer, const char* modelPath);
 	~Mesh();
 	void Draw();
 	virtual void SetMaterial(Material* _material);
 	void Dispose();
 	void BindMaterial();
 	void SetTexture(const char * imagepath);	
+	void Update(float deltaTime) override;
 protected:
 	std::vector<ModelData> models;
 	Material* material;
