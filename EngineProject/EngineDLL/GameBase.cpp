@@ -1,14 +1,13 @@
 #include "GameBase.h"
 #include "TypeDefs.h"
 #include "GLFW\glfw3.h"
-
 GameBase::GameBase(int _screenWidht, int _screenHeight, string _screenName) :
 	screenHeight(_screenHeight),
 	screenWidth(_screenWidht),
 	screenName(_screenName)
 {
 }
-GameBase::~GameBase()
+GameBase::~GameBase() 
 {
 }
 bool GameBase::Start()

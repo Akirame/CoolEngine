@@ -15,7 +15,10 @@ Entity::Entity(Renderer* _renderer) :
 	rotateZ = glm::mat4(1.0f);
 	scale = glm::mat4(1.0f);
 }
-
+glm::vec3 Entity::GetPos() 
+{ 
+	return pos; 
+}
 void Entity::CreateCollider(float width, float height, bool trigger, bool _isStatic)
 {
 	BBHeight = height;

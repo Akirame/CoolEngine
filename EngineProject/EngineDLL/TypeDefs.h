@@ -3,4 +3,4 @@
 #pragma comment (lib,"..\\external\\glfw-3.2.1\\lib-vc2015\\glfw3.lib")
 #pragma comment (lib,"opengl32.lib")
 #pragma comment (lib, "glu32.lib")
-#pragma comment (lib,"..\\external\\Box2D\\bin\\Release\\Box2D.lib")
+#pragma comment (lib,"..\\external\\b2d\\Lib\\Box2D.lib")

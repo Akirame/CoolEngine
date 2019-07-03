@@ -25,7 +25,7 @@ public:
 	Entity(Renderer* _renderer);
 	~Entity();		
 	virtual void Draw() = 0;
-	glm::vec3 GetPos() { return pos; }	
+	glm::vec3 GetPos();
 	void CreateCollider(float width, float height, bool trigger, bool _isStatic);
 	BoxCollider* GetCollider() { return collider; }
 	virtual void OnCollision() = 0;
