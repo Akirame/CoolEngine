@@ -87,7 +87,7 @@ void Shape::SetRotateY(float y)
 	glm::vec3 axis;
 	axis[1] = y;
 	axis[0] = axis[2] = 0;
-	rotateX = glm::rotate(glm::mat4(1.0f), y, axis);
+	rotateY = glm::rotate(glm::mat4(1.0f), y, axis);
 	UpdateModelMatrix();
 }
 void Shape::SetRotateZ(float z)
@@ -96,7 +96,7 @@ void Shape::SetRotateZ(float z)
 	glm::vec3 axis;
 	axis[2] = z;
 	axis[0] = axis[1] = 0;
-	rotateX = glm::rotate(glm::mat4(1.0f), z, axis);
+	rotateZ = glm::rotate(glm::mat4(1.0f), z, axis);
 	UpdateModelMatrix();
 }
 void Shape::UpdateModelMatrix()

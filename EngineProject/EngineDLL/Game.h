@@ -24,6 +24,10 @@ protected:
 	Material* mat;
 	Player* player;
 	Tilemap* tilemap;
+	b2World* m_World;
+	float32 timeStep;
+	int32 velocityIterations;
+	int32 positionIterations;
 	float* coord;
 	float conta;	
 public:

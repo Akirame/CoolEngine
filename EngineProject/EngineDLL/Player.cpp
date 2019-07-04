@@ -1,11 +1,14 @@
 #include "Player.h"
 #include "GLFW\glfw3.h"
 #include "Tilemap.h"
-Player::Player(Renderer* _renderer) : Sprite(_renderer)
+
+
+Player::Player(Renderer* _renderer, b2Body* _dynamicBody) : rigidBody(_dynamicBody),Sprite(_renderer)
 {
 	animator = new Animation(this);
 	animator->CreateAnimation(0, 10);
-	SetPosition(-200, 0, 10);
+	SetPosition(-200, 0, 10);	
+	
 }
 
 
@@ -65,4 +68,8 @@ void Player::OnUpdate(float deltaTime)
 	if (glfwGetKey((GLFWwindow*)renderer->window->GetWindowPrt(), GLFW_KEY_1) == GLFW_PRESS) {
 		SetPosition(-200, 0, 5);
 	}
+	rigidBody->SetLinearVelocity(b2Vec2(0, -5));
+	cout << "MoveIn x:" << rigidBody->GetPosition().x << ", y: " << rigidBody->GetPosition().y << endl;
+	MoveIn(rigidBody->GetPosition().x, rigidBody->GetPosition().y, 0);
+	
 }
