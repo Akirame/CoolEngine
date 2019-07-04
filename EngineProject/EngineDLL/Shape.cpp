@@ -52,6 +52,7 @@ void Shape::SetPosition(float x, float y, float z)
 	pos[0] = x;
 	pos[1] = y;
 	pos[2] = z;
+
 	translate = glm::translate(glm::mat4(1.0f), pos);
 	UpdateModelMatrix();
 }
@@ -60,6 +61,7 @@ void Shape::MoveIn(float x, float y, float z)
 	pos[0] += x;
 	pos[1] += y;
 	pos[2] += z;
+
 	translate = glm::translate(glm::mat4(1.0f), pos);
 	UpdateModelMatrix();
 }
@@ -78,7 +80,10 @@ void Shape::SetRotateX(float x)
 	glm::vec3 axis;
 	axis[0] = x;
 	axis[1] = axis[2] = 0;
-	rotateX = glm::rotate(glm::mat4(1.0f), x, axis);
+
+	rotateX = glm::translate(glm::mat4(1.0f), pivot)
+			* glm::rotate(glm::mat4(1.0f), x, axis)
+			* glm::translate(glm::mat4(1.0f), -pivot);
 	UpdateModelMatrix();
 }
 void Shape::SetRotateY(float y)
@@ -87,7 +92,10 @@ void Shape::SetRotateY(float y)
 	glm::vec3 axis;
 	axis[1] = y;
 	axis[0] = axis[2] = 0;
-	rotateY = glm::rotate(glm::mat4(1.0f), y, axis);
+
+	rotateY = glm::translate(glm::mat4(1.0f), pivot)
+			* glm::rotate(glm::mat4(1.0f), y, axis)
+			* glm::translate(glm::mat4(1.0f), -pivot);
 	UpdateModelMatrix();
 }
 void Shape::SetRotateZ(float z)
@@ -95,11 +103,19 @@ void Shape::SetRotateZ(float z)
 	rot[2] = z;
 	glm::vec3 axis;
 	axis[2] = z;
-	axis[0] = axis[1] = 0;
-	rotateZ = glm::rotate(glm::mat4(1.0f), z, axis);
+	axis[0] = axis[1] = 0;	
+	
+	rotateZ = glm::translate(glm::mat4(1.0f), pivot)
+			* glm::rotate(glm::mat4(1.0f), z, axis)
+			* glm::translate(glm::mat4(1.0f), -pivot);
+
 	UpdateModelMatrix();
 }
 void Shape::UpdateModelMatrix()
 {
 	model = translate * rotateX * rotateY * rotateZ * scale;
+}
+void Shape::SetPivot(glm::vec3 _pivot)
+{
+	pivot = _pivot;
 }

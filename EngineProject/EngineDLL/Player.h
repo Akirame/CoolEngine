@@ -6,7 +6,7 @@
 class ENGINEDLL_API Player : public Sprite
 {
 public:
-	Player(Renderer* _renderer, b2Body* _dynamicBody);
+	Player(Renderer* _renderer, b2Body* _rigidBody);
 	~Player();
 	void OnUpdate(float deltaTime) override;
 	float speed = 200;	

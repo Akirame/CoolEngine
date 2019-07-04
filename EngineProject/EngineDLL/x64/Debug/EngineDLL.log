@@ -1,37 +1,38 @@
 ﻿  Animation.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   BoxCollider.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\boxcollider.cpp(6): warning C4273: 'BoxCollider::BoxCollider': vinculación de DLL incoherente
-  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\boxcollider.h(11): note: vea la definición anterior de '{ctor}'
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\boxcollider.cpp(12): warning C4273: 'BoxCollider::~BoxCollider': vinculación de DLL incoherente
-  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\boxcollider.h(12): note: vea la definición anterior de '{dtor}'
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\boxcollider.cpp(6): warning C4273: 'BoxCollider::BoxCollider': vinculación de DLL incoherente
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\boxcollider.h(11): note: vea la definición anterior de '{ctor}'
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\boxcollider.cpp(12): warning C4273: 'BoxCollider::~BoxCollider': vinculación de DLL incoherente
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\boxcollider.h(12): note: vea la definición anterior de '{dtor}'
   Circle.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   CollisionManager.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   Entity.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   GameBase.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   Material.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\material.h(3): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\material.h(3): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   Player.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   Renderer.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   Shape.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   Sprite.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   Square.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+  Test.cpp
   TextureImporter.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\textureimporter.cpp(3): fatal error C1083: No se puede abrir el archivo incluir: 'GL\glew.h': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\textureimporter.cpp(3): fatal error C1083: No se puede abrir el archivo incluir: 'GL\glew.h': No such file or directory
   Tilemap.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\tilemap.h(2): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\tilemap.h(2): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   Triangle.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(4): fatal error C1083: No se puede abrir el archivo incluir: 'glm\glm.hpp': No such file or directory
   Window.cpp
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\window.cpp(5): fatal error C1083: No se puede abrir el archivo incluir: 'GLFW\glfw3.h': No such file or directory
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\window.cpp(5): fatal error C1083: No se puede abrir el archivo incluir: 'GLFW\glfw3.h': No such file or directory
   Generando código...

@@ -37,6 +37,7 @@ bool Game::OnStart()
 	boxFixtureDef.shape = &boxShape;
 	boxFixtureDef.density = 1;
 	dynamicBody->CreateFixture(&boxFixtureDef);
+
 	cout << "Game::OnStart()" << endl;
 	mat = new Material();
 	tilemap = new Tilemap(renderer, screenHeight, screenWidth);
@@ -47,6 +48,7 @@ bool Game::OnStart()
 		player->SetMaterial(mat);
 		player->SetTexture("bitmap2.bmp");
 		player->SetFrameType(64, 64, 8);
+		player->SetPivot(glm::vec3(32, 32, 0));
 		player->SetFrame(0);
 	}
 	if (tilemap && mat)
@@ -66,9 +68,11 @@ bool Game::OnStop()
 }
 bool Game::OnUpdate(float deltaTime)
 {
+	conta += deltaTime;
 	m_World->Step(timeStep, velocityIterations, positionIterations);
 	renderer->CameraFollow(player->GetPos());
 	tilemap->Draw();
+	player->SetRotateZ(conta);
 	player->OnUpdate(deltaTime);
 	player->Draw();
 	if (loopCount > 10000)
