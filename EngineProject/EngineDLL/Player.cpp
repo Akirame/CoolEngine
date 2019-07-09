@@ -26,7 +26,7 @@ void Player::OnUpdate(float deltaTime)
 	// Move UP
 	if (glfwGetKey((GLFWwindow*)renderer->window->GetWindowPrt(), GLFW_KEY_UP) == GLFW_PRESS) {
 		animator->Play("Flying", deltaTime);
-		rigidBody->ApplyForceToCenter(500 * direction, true);
+		rigidBody->ApplyForceToCenter(8000 * direction, true);
 	}
 	else
 	{
@@ -46,11 +46,33 @@ void Player::OnUpdate(float deltaTime)
 		SetPosition(-200, 0, 5);
 	}
 	if (rigidBody)
-		SetPosition(rigidBody->GetPosition().x, rigidBody->GetPosition().y, 0);
+		SetPosition(rigidBody->GetPosition().x, rigidBody->GetPosition().y, 0);	
 	SetRotate(0, 0, angleRotation);
 }
-
+void Player::CollisionCallback()
+{
+	cout << "ola: " <<rigidBody->GetLinearVelocity().x << "," << rigidBody->GetLinearVelocity().y << endl;	
+	if (CloseToZero(rigidBody->GetLinearVelocity().x) && CloseToZero(rigidBody->GetLinearVelocity().y))
+	{
+		b2Vec2 v;
+		v.Set(0.0f, 0.0f);
+		rigidBody->SetLinearVelocity(v);
+	}
+	else
+	{
+		b2Vec2 vec;
+		vec.Set(0.0f, 0.0f);
+		rigidBody->SetLinearVelocity(vec);
+		rigidBody->SetTransform(vec, 0);
+	}
+}
 void Player::SetRigidbody(b2Body * body)
 {
 	rigidBody = body;
+}
+bool Player::CloseToZero(float value)
+{
+	if (value < 3.0f && value > -3.0f)
+		return true;
+	return false;
 }

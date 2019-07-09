@@ -1,7 +1,7 @@
 #include "Shape.h"
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
-
+#include "GLFW\glfw3.h"
 
 Shape::Shape(Renderer* _renderer) :
 	Entity(_renderer)
@@ -120,4 +120,7 @@ void Shape::SetRotate(float x, float y, float z)
 void Shape::UpdateModelMatrix()
 {
 	model = translate * rotateX * rotateY * rotateZ * scale;
+	if (glfwGetKey((GLFWwindow*)renderer->window->GetWindowPrt(), GLFW_KEY_UP) == GLFW_PRESS) {
+		model = translate * rotateX * rotateY * rotateZ * scale;
+	}
 }

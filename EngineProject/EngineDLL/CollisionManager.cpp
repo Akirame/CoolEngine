@@ -45,11 +45,12 @@ void CollisionManager::CheckLineBoxCollisions()
 				iterB--;
 				float rx = (*iterA)->GetPos().x;
 				float ry = (*iterA)->GetPos().y;
-				float rw = (*iterA)->GetCollider()->width/2;
+				float rw = (*iterA)->GetCollider()->width / 4;
 				float rh = (*iterA)->GetCollider()->height/2;
 				if (lineRect(x1, y1, x2, y2, rx, ry, rw, rh))
 				{
-					cout << "holi";
+					(*iterA)->CollisionCallback();
+					break;
 				}
 			}
 		}

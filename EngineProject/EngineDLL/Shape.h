@@ -22,6 +22,7 @@ public:
 	void SetColorVertices(float* vertices);
 	void MoveIn(float x, float y, float z);
 	void Translate(float x, float y);
+	virtual void CollisionCallback() {};
 protected:
 	Material * material;
 	unsigned int bufferData;

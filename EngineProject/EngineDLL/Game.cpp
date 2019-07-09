@@ -28,11 +28,11 @@ bool Game::OnStart()
 	// Body def player
 	b2BodyDef myBodyDef;
 	myBodyDef.type = b2_dynamicBody; //this will be a dynamic body
-	myBodyDef.position.Set(0, 0); //set the starting position
+	myBodyDef.position.Set(350, -250); //set the starting position
 	myBodyDef.angle = 90; //set the starting angle
-	myBodyDef.gravityScale = 0.5f;
+	myBodyDef.gravityScale = 0.9f;	
 	b2PolygonShape boxShape;
-	boxShape.SetAsBox(40, 40);
+	boxShape.SetAsBox(40, 40);		
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
 	boxFixtureDef.density = 1;
@@ -53,18 +53,55 @@ bool Game::OnStart()
 	b2Body* platRigid = world2D->CreateBody(&myBodyDefPlat);
 	platRigid->CreateFixture(&boxFixtureDefPlat);
 	landingPlatform->SetRigidbody(platRigid);
+	// Body def turrets
+	b2BodyDef myBodyDefTurret;
+	myBodyDefTurret.type = b2_staticBody;
+	myBodyDefTurret.position.Set(200, -200);
+	myBodyDefTurret.gravityScale = 0.0f;
+	myBodyDefTurret.angle = 0;
+	b2PolygonShape boxShapeTurret;
+	boxShapeTurret.SetAsBox(40, 40);
+	b2FixtureDef boxFixtureDefTurret;
+	boxFixtureDefTurret.shape = &boxShapeTurret;
+	boxFixtureDefTurret.density = 1;
+	b2Body* turretRigid = world2D->CreateBody(&myBodyDefTurret);
+	turretRigid->CreateFixture(&boxFixtureDefTurret);
+	turret->SetRigidbody(turretRigid);
+	cout << "ready" << endl;
 
 	// Ground
-	b2Vec2 vs[4];
-	vs[0].Set(0.0f, -50);
-	vs[1].Set(100.0f, -100.0f);
-	vs[2].Set(300.0f, -200.0f);
-	vs[3].Set(400.0f, -200.0f);		list<b2Vec2> groundList;
-	groundList.push_back(vs[0]);
-	groundList.push_back(vs[1]);
-	groundList.push_back(vs[2]);
-	groundList.push_back(vs[3]);
+	float aux = 2;
+	b2Vec2 vs[12];	
+	vs[0].Set(-3000.0f * aux, -200.0 * aux);
+	vs[1].Set(100.0f * aux ,  -200.0 * aux);
+	vs[2].Set(120.0f * aux,  -100.0f * aux);
+	vs[3].Set(150.0f * aux,  -120.0f * aux);
+	vs[4].Set(150.0f * aux,  -170.0f * aux);
+	vs[5].Set(210.0f * aux,  -170.0f * aux);
+	vs[6].Set(230.0f * aux,  -200.0f * aux);
+	vs[7].Set(410.0f * aux,  -200.0f * aux);
+	vs[8].Set(440.0f * aux,  -100.0f * aux);
+	vs[9].Set(480.0f * aux,  -150.0f * aux);
+	vs[10].Set(560.0f * aux,  -100.0f * aux);
+	vs[11].Set(6200.0f * aux,  -100.0f * aux);
+
+	b2BodyDef chainDef;
+	chainDef.type = b2_staticBody;
+	chainDef.position.Set(0, -50); //set the starting position
+	b2ChainShape chain;
+	chain.CreateChain(vs, 12);
+	b2FixtureDef chainFixture;
+	chainFixture.shape = &chain;
+	chainFixture.density = 1;
+	b2Body* groundRigid = world2D->CreateBody(&chainDef);
+	groundRigid->CreateFixture(&chainFixture);
+	list<b2Vec2> groundList;	
+	for (int i = 0; i < 12; i++)
+	{
+		groundList.push_back(vs[i]);		
+	}			
 	ground->SetLinesVertices(groundList);
+	
 	
 	if (player && mat)
 	{
@@ -87,9 +124,9 @@ bool Game::OnStart()
 	if (turret && mat)
 	{
 		turret->SetMaterial(mat);
-		turret->SetTexture("Nave.bmp");
-		turret->SetFrameType(40, 40, 7);
-		turret->SetFrame(0);
+		turret->SetTexture("Turret.bmp");
+		turret->SetFrameType(16,16, 1);
+		turret->SetFrame(1);
 	}
 	if (tilemap && mat)
 	{
@@ -111,7 +148,7 @@ bool Game::OnUpdate(float deltaTime)
 {	
 	world2D->Step(1 / 20.0, 8, 3);
 	renderer->CameraFollow(player->GetPos());
-	CollisionManager::GetInstance()->Update();
+	//CollisionManager::GetInstance()->Update();
 	conta += deltaTime * 1;
 	//tilemap->Draw();
 	turret->Draw();

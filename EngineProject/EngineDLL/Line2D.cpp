@@ -30,7 +30,7 @@ void Line2D::SetLinesVertices(list<b2Vec2> _lines)
 
 	bufferData = renderer->GenBuffer(&lineVertices[0], lineVertices.size() * sizeof(float));
 	vtxCount = lineVertices.size() / 3;
-	CollisionManager::GetInstance()->SetLinesVertices(points);
+	//CollisionManager::GetInstance()->SetLinesVertices(points);
 }
 void Line2D::Draw()
 {
