@@ -11,7 +11,7 @@ Sprite::Sprite(Renderer* _renderer) :
 		0.0f,0.0f,0.0f,
 		1.0f,0.0f,0.0f,
 	};
-	
+
 	float g_uv_buffer_data[] = {
 		0.0f,1.0f,
 		1.0f,1.0f,
@@ -20,9 +20,11 @@ Sprite::Sprite(Renderer* _renderer) :
 	};
 	typeOfShape = Renderer::RGL_TRIANGLE_STRIP;
 	shouldDispose = false;
-	SetVertices(g_vertex_buffer_data, 4);	
-	SetVerticesUV(g_uv_buffer_data);	
-
+	SetVertices(g_vertex_buffer_data, 4);
+	SetVerticesUV(g_uv_buffer_data);
+	pivot.x = 0;
+	pivot.y = 0;
+	pivot.z = 0;
 }
 void Sprite::SetVerticesUV(float* vertices)
 {
@@ -50,7 +52,7 @@ void Sprite::SetTexture(const char * imagepath)
 		widthFrame,heightFrame,0.0f,
 		0.0f,0.0f,0.0f,
 		widthFrame,0.0f,0.0f,
-	};	
+	};
 	SetVertices(g_vertex_buffer_data, 4);
 }
 
@@ -66,8 +68,8 @@ void Sprite::Draw()
 	}
 	renderer->EnableBuffer(0);
 	renderer->EnableBuffer(1);
-	renderer->BindBuffer(bufferData,3, 0);
-	renderer->BindBuffer(verticesUV,2,1);
+	renderer->BindBuffer(bufferData, 3, 0);
+	renderer->BindBuffer(verticesUV, 2, 1);
 	renderer->Draw(vtxCount, typeOfShape);
 	renderer->DisableBuffer(0);
 	renderer->DisableBuffer(1);
@@ -78,16 +80,22 @@ void Sprite::SetFrame(unsigned int id)
 	{
 		GetOffsetX(id) / widthTotal, 1 - (GetOffsetY(id) / heightTotal) ,
 		(GetOffsetX(id) + widthFrame) / widthTotal, 1 - GetOffsetY(id) / heightTotal,
-		GetOffsetX(id) / widthTotal, 1 - ( GetOffsetY(id) + heightFrame) / heightTotal,
-		(GetOffsetX(id) + widthFrame) / widthTotal, 1 - (GetOffsetY(id) + heightFrame) / heightTotal		
+		GetOffsetX(id) / widthTotal, 1 - (GetOffsetY(id) + heightFrame) / heightTotal,
+		(GetOffsetX(id) + widthFrame) / widthTotal, 1 - (GetOffsetY(id) + heightFrame) / heightTotal
 	};
 	SetVerticesUV(vertices);
 }
-void Sprite::SetFrameType(int frameWidth,int frameHeight,int framesCountPerRow)
+void Sprite::SetFrameType(int frameWidth, int frameHeight, int framesCountPerRow)
 {
 	widthFrame = frameWidth;
 	heightFrame = frameHeight;
 	framesTotal = framesCountPerRow;
+	SetPivot(frameWidth / 2, frameHeight / 2);
+}
+void Sprite::SetPivot(int x, int y)
+{
+	pivot.x = x;
+	pivot.y = y;
 }
 float Sprite::GetOffsetX(unsigned int id)
 {
@@ -95,5 +103,5 @@ float Sprite::GetOffsetX(unsigned int id)
 }
 float Sprite::GetOffsetY(unsigned int id)
 {
-	return (id/ framesTotal)*heightFrame;
+	return (id / framesTotal)*heightFrame;
 }

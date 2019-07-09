@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include "Exports.h"
-
+#define DEGTORAD 0.0174532925199432957f
+#define RADTODEG 57.295779513082320876f
 
 
 using namespace std;

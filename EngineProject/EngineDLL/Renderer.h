@@ -19,7 +19,8 @@ public:
 	enum DrawTypes {RGL_TRIANGLES = 0x0004, 
 		RGL_TRIANGLE_STRIP = 0x0005,
 		RGL_TRIANGLE_FAN = 0x0006,
-		RGL_QUADS = 0x0007
+		RGL_QUADS = 0x0007,
+		RGL_LINE_STRIP = 0x0003
 	};
 	Renderer(Window* _window);
 	~Renderer();

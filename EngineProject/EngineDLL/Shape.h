@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Material.h"
-#include "glm\glm.hpp"
+
 class ENGINEDLL_API Shape :
 	public Entity
 {
@@ -18,11 +18,11 @@ public:
 	void SetRotateX(float x);
 	void SetRotateY(float y);
 	void SetRotateZ(float z);
+	void SetRotate(float x, float y, float z);
 	void SetColorVertices(float* vertices);
 	void MoveIn(float x, float y, float z);
-	void SetPivot(glm::vec3 _pivot);
+	void Translate(float x, float y);
 protected:
-	glm::vec3 pivot;
 	Material * material;
 	unsigned int bufferData;
 	unsigned int bufferColor;
@@ -33,6 +33,7 @@ protected:
 	int vtxCount;
 	int vtxSize;
 	void UpdateModelMatrix();
+	glm::vec3 pivot;
 	Renderer::DrawTypes typeOfShape;
 };
 

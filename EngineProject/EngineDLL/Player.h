@@ -1,18 +1,22 @@
 #pragma once
-#include "Animation.h"
+#include "AnimationPlayer.h"
 #include "Exports.h"
-#include "Box2D/Box2D.h"
+#include "Sprite.h"
 
 class ENGINEDLL_API Player : public Sprite
 {
 public:
-	Player(Renderer* _renderer, b2Body* _rigidBody);
+	Player(Renderer* _renderer);
 	~Player();
 	void OnUpdate(float deltaTime) override;
-	float speed = 200;	
-	b2Body* rigidBody;
+	void SetRigidbody(b2Body* body);
 private:
-	Animation * animator;
-
+	Animation * idleAnimation;
+	Animation * flyingAnimation;
+	Animation * dieAnimation;
+	AnimationPlayer * animator;
+	b2Body* rigidBody;
+	float angleRotation = 0;
+	b2Vec2 direction = b2Vec2_zero;
 };
 

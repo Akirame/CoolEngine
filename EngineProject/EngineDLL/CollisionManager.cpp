@@ -7,7 +7,7 @@ CollisionManager* CollisionManager::GetInstance()
 {
 	if(instance == 0)
 	{
-		instance = new CollisionManager();		
+		instance = new CollisionManager();
 	}
 	return instance;
 }
@@ -21,7 +21,69 @@ void CollisionManager::AddToGroup(std::string groupName, Shape* collider)
 
 void CollisionManager::Update()
 {
-	CheckBoxCollisions();
+	CheckLineBoxCollisions();
+}
+void CollisionManager::SetLinesVertices(list<b2Vec2> _lineVertices)
+{
+	lineVertices = _lineVertices;
+}
+void CollisionManager::CheckLineBoxCollisions()
+{
+	list<Shape*>::iterator iterA = colliderMap["A"].begin();
+	list<b2Vec2>::iterator iterB = lineVertices.begin();
+	for (iterA; iterA != colliderMap["A"].end(); iterA++)
+	{
+		for (iterB; iterB != lineVertices.end(); iterB++)
+		{
+			if (std::next(iterB, 1) != lineVertices.end())
+			{
+				float x1 = (*iterB).x;
+				float y1 = (*iterB).y;
+				iterB++;
+				float x2 = (*iterB).x;
+				float y2 = (*iterB).y;
+				iterB--;
+				float rx = (*iterA)->GetPos().x;
+				float ry = (*iterA)->GetPos().y;
+				float rw = (*iterA)->GetCollider()->width/2;
+				float rh = (*iterA)->GetCollider()->height/2;
+				if (lineRect(x1, y1, x2, y2, rx, ry, rw, rh))
+				{
+					cout << "holi";
+				}
+			}
+		}
+	}
+}
+
+bool CollisionManager::lineLine(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
+
+	// calculate the direction of the lines
+	float uA = ((x4 - x3)*(y1 - y3) - (y4 - y3)*(x1 - x3)) / ((y4 - y3)*(x2 - x1) - (x4 - x3)*(y2 - y1));
+	float uB = ((x2 - x1)*(y1 - y3) - (y2 - y1)*(x1 - x3)) / ((y4 - y3)*(x2 - x1) - (x4 - x3)*(y2 - y1));
+
+	// if uA and uB are between 0-1, lines are colliding
+	if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1)
+		return true;
+
+	return false;
+}
+
+bool CollisionManager::lineRect(float x1, float y1, float x2, float y2, float rx, float ry, float rw, float rh) {
+
+	// check if the line has hit any of the rectangle's sides
+	// uses the Line/Line function below
+	bool left = lineLine(x1, y1, x2, y2, rx, ry, rx, ry + rh);
+	bool right = lineLine(x1, y1, x2, y2, rx + rw, ry, rx + rw, ry + rh);
+	bool top = lineLine(x1, y1, x2, y2, rx, ry, rx + rw, ry);
+	bool bottom = lineLine(x1, y1, x2, y2, rx, ry + rh, rx + rw, ry + rh);
+
+	// if ANY of the above are true, the line
+	// has hit the rectangle
+	if (left || right || top || bottom) {
+		return true;
+	}
+	return false;
 }
 void CollisionManager::CheckBoxCollisions()
 {
