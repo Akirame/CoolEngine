@@ -24,7 +24,8 @@ bool Game::OnStart()
 	world2D = new b2World(gravity);
 	landingPlatform = new Platform(renderer);
 	player = new Player(renderer);
-	turret = new Turret(renderer, world2D,player);
+	bullet1 = new Bullet(renderer);
+	turret = new Turret(renderer, world2D,player,bullet1);	
 	ground = new Line2D(renderer);
 
 	// Body def player
@@ -75,15 +76,15 @@ bool Game::OnStart()
 	myBodyDefBullet.position.Set(250, -200);
 	myBodyDefBullet.gravityScale = 0.0f;
 	myBodyDefBullet.angle = 0;
-	b2PolygonShape boxShapBullet;
-	boxShapBullet.SetAsBox(40, 40);
+	myBodyDefBullet.bullet = true;
+	b2PolygonShape boxShapeBullet;
+	boxShapeBullet.SetAsBox(40, 40);
 	b2FixtureDef boxFixtureDefBullet;
-	boxFixtureDefBullet.shape = &boxShapeTurret;
+	boxFixtureDefBullet.shape = &boxShapeBullet;
 	boxFixtureDefBullet.density = 1;
 	b2Body* bulletRigid = world2D->CreateBody(&myBodyDefBullet);
-	turretRigid->CreateFixture(&boxFixtureDefBullet);
-	turret->SetRigidbodyBullets(bulletRigid);
-
+	bulletRigid->CreateFixture(&boxFixtureDefBullet);	
+	bullet1->SetRigidbody(bulletRigid);
 	// Ground
 	float aux = 2;
 	b2Vec2 vs[12];	
@@ -143,6 +144,13 @@ bool Game::OnStart()
 		turret->SetFrameType(16,16, 1);
 		turret->SetFrame(1);
 	}
+	if (bullet1 && mat)
+	{
+		bullet1->SetMaterial(mat);
+		bullet1->SetTexture("Bullet.bmp");
+		bullet1->SetFrameType(16, 16, 7);
+		bullet1->SetFrame(0);
+	}
 	if (tilemap && mat)
 	{
 		tilemap->SetMaterial(mat);
@@ -163,9 +171,7 @@ bool Game::OnUpdate(float deltaTime)
 {	
 	world2D->Step(1 / 20.0, 8, 3);
 	renderer->CameraFollow(player->GetPos());
-	//CollisionManager::GetInstance()->Update();
 	conta += deltaTime * 1;
-	//tilemap->Draw();
 	turret->Draw();
 	turret->OnUpdate(deltaTime);
 	player->OnUpdate(deltaTime);

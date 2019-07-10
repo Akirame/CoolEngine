@@ -8,11 +8,10 @@ class Bullet;
 class ENGINEDLL_API Turret :	public Sprite
 {
 public:
-	Turret(Renderer* rend, b2World* world,Player* playerReference);
+	Turret(Renderer* rend, b2World* world,Player* playerReference,Bullet* _bullet);
 	~Turret();
 	void OnUpdate(float deltaTime) override;
 	void SetRigidbody(b2Body* body);
-	void SetRigidbodyBullets(b2Body* body);
 	void Draw() override;
 	void Shoot();
 	void DisposeBullet();

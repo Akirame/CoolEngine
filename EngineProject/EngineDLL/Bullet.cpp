@@ -1,9 +1,8 @@
 #include "Bullet.h"
 #include "Turret.h"
 
-Bullet::Bullet(Renderer * rend, Turret* _turretParent) : Sprite(rend)
+Bullet::Bullet(Renderer * rend) : Sprite(rend)
 {
-	turretParent = _turretParent;
 }
 
 Bullet::~Bullet()
@@ -12,13 +11,10 @@ Bullet::~Bullet()
 
 void Bullet::OnUpdate(float deltaTime)
 {
-	lifeTime -= deltaTime;	
 	if (rigidBody)
 	{
 		SetPosition(rigidBody->GetPosition().x, rigidBody->GetPosition().y, 0);
 	}
-	if (lifeTime <= 0)
-		turretParent->DisposeBullet();
 }
 void Bullet::SetDirection(b2Vec2 vec, float speed)
 {
@@ -34,4 +30,18 @@ void Bullet::SetDirection(b2Vec2 vec, float speed)
 void Bullet::SetRigidbody(b2Body * body)
 {
 	rigidBody = body;
+}
+
+void Bullet::Reset()
+{
+	rigidBody->SetTransform(b2Vec2(turretParent->GetPos().x, turretParent->GetPos().y),0);
+}
+void Bullet::Delete()
+{	
+	rigidBody->SetTransform(b2Vec2(1000000,1000000), 0);
+	rigidBody->SetLinearVelocity(b2Vec2(0, 0));	
+}
+void Bullet::SetParent(Turret* parent)
+{
+	turretParent = parent;
 }

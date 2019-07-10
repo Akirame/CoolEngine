@@ -9,6 +9,7 @@
 #include "Platform.h"
 #include "Line2D.h"
 #include "Turret.h"
+#include "Bullet.h"
 
 using namespace std;
 
@@ -26,6 +27,8 @@ protected:
 	Tilemap* tilemap;
 	Line2D* ground;
 	Turret* turret;
+	Bullet* bullet1;
+	Bullet* bullet2;
 	float* coord;
 	float conta;
 public:
