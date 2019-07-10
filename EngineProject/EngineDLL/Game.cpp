@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "GLFW\glfw3.h"
 #include "GLFW\glfw3native.h"
+
+
 Game::Game(int _screenWidht, int _screenHeight, string _screenName): GameBase(_screenWidht, _screenHeight, _screenName)
 {	
 	loopCount = 0;
@@ -22,7 +24,7 @@ bool Game::OnStart()
 	world2D = new b2World(gravity);
 	landingPlatform = new Platform(renderer);
 	player = new Player(renderer);
-	turret = new Turret(renderer, world2D);
+	turret = new Turret(renderer, world2D,player);
 	ground = new Line2D(renderer);
 
 	// Body def player
@@ -67,7 +69,20 @@ bool Game::OnStart()
 	b2Body* turretRigid = world2D->CreateBody(&myBodyDefTurret);
 	turretRigid->CreateFixture(&boxFixtureDefTurret);
 	turret->SetRigidbody(turretRigid);
-	cout << "ready" << endl;
+	// Body def bullets
+	b2BodyDef myBodyDefBullet;
+	myBodyDefBullet.type = b2_dynamicBody;
+	myBodyDefBullet.position.Set(250, -200);
+	myBodyDefBullet.gravityScale = 0.0f;
+	myBodyDefBullet.angle = 0;
+	b2PolygonShape boxShapBullet;
+	boxShapBullet.SetAsBox(40, 40);
+	b2FixtureDef boxFixtureDefBullet;
+	boxFixtureDefBullet.shape = &boxShapeTurret;
+	boxFixtureDefBullet.density = 1;
+	b2Body* bulletRigid = world2D->CreateBody(&myBodyDefBullet);
+	turretRigid->CreateFixture(&boxFixtureDefBullet);
+	turret->SetRigidbodyBullets(bulletRigid);
 
 	// Ground
 	float aux = 2;

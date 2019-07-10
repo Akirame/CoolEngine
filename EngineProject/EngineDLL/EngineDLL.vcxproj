@@ -127,6 +127,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationPlayer.h" />
     <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Entity.h" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationPlayer.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Entity.cpp" />

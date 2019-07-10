@@ -55,7 +55,7 @@ void Player::CollisionCallback()
 	if (CloseToZero(rigidBody->GetLinearVelocity().x) && CloseToZero(rigidBody->GetLinearVelocity().y))
 	{
 		b2Vec2 v;
-		v.Set(0.0f, 0.0f);
+		v.Set(0.0f, 0.0f);		
 		rigidBody->SetLinearVelocity(v);
 	}
 	else
