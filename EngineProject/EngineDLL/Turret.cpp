@@ -42,9 +42,8 @@ void Turret::SetRigidbody(b2Body * body)
 }
 void Turret::Shoot()
 {
-	cout << "SHOOT" << endl;
-	bullet->Reset();
-	bullet->SetDirection(b2Vec2(player->GetPos().x, player->GetPos().y), 30);	
+	cout << "SHOOT" << endl;	
+	bullet->SetDirection(rigidBody->GetPosition() + b2Vec2(0, 60), player->GetRigidbody()->GetPosition());
 }
 void Turret::DisposeBullet()
 {

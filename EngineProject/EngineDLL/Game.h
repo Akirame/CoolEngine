@@ -10,6 +10,7 @@
 #include "Line2D.h"
 #include "Turret.h"
 #include "Bullet.h"
+#define LENGTH_TERRAIN 100
 
 using namespace std;
 

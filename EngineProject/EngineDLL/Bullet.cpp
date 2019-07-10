@@ -16,26 +16,19 @@ void Bullet::OnUpdate(float deltaTime)
 		SetPosition(rigidBody->GetPosition().x, rigidBody->GetPosition().y, 0);
 	}
 }
-void Bullet::SetDirection(b2Vec2 vec, float speed)
-{
-	if (rigidBody)
-	{
-		vec *= speed;
-		rigidBody->SetLinearVelocity(vec);
-		angleRotation = atan2(vec.y, vec.x) * RADTODEG;
-		//SetRotate(0, 0, angleRotation);
-	}
+void Bullet::SetDirection(b2Vec2 initPos, b2Vec2 playerPos)
+{	
+	rigidBody->SetTransform(initPos, 0);
+	b2Vec2 vec = playerPos - initPos;
+	float norm = sqrt(vec.x * vec.x + vec.y * vec.y);
+	b2Vec2 direction = b2Vec2(vec.x / norm, vec.y / norm);
+	rigidBody->SetLinearVelocity(100 * direction);
 }
-
 void Bullet::SetRigidbody(b2Body * body)
 {
 	rigidBody = body;
 }
 
-void Bullet::Reset()
-{
-	rigidBody->SetTransform(b2Vec2(turretParent->GetPos().x, turretParent->GetPos().y),0);
-}
 void Bullet::Delete()
 {	
 	rigidBody->SetTransform(b2Vec2(1000000,1000000), 0);

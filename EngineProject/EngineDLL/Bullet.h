@@ -11,8 +11,7 @@ public:
 	~Bullet();
 	void OnUpdate(float deltaTime) override;
 	void SetRigidbody(b2Body* body);
-	void SetDirection(b2Vec2 vec, float speed);
-	void Reset();
+	void SetDirection(b2Vec2 initPos, b2Vec2 playerPos);	
 	void Delete();
 	bool Alive() { return alive; }
 	void SetParent(Turret* parent);

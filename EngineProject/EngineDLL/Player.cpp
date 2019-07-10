@@ -25,8 +25,8 @@ void Player::OnUpdate(float deltaTime)
 	direction = b2Vec2(cos(((angleRotation * RADTODEG) + 90) * DEGTORAD), sin(((angleRotation * RADTODEG) + 90) * DEGTORAD));
 	// Move UP
 	if (glfwGetKey((GLFWwindow*)renderer->window->GetWindowPrt(), GLFW_KEY_UP) == GLFW_PRESS) {
-		animator->Play("Flying", deltaTime);
-		rigidBody->ApplyForceToCenter(8000 * direction, true);
+		animator->Play("Flying", deltaTime);		
+		rigidBody->ApplyForceToCenter(1666000 * direction, true);
 	}
 	else
 	{
@@ -35,7 +35,7 @@ void Player::OnUpdate(float deltaTime)
 	// Strafe right
 	if (glfwGetKey((GLFWwindow*)renderer->window->GetWindowPrt(), GLFW_KEY_RIGHT) == GLFW_PRESS) {
 		angleRotation -= deltaTime * 1;
-
+		rigidBody->SetLinearVelocity(b2Vec2(0, 0));
 	}
 	// Strafe left
 	if (glfwGetKey((GLFWwindow*)renderer->window->GetWindowPrt(), GLFW_KEY_LEFT) == GLFW_PRESS) {

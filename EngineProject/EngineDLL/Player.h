@@ -12,6 +12,7 @@ public:
 	void OnUpdate(float deltaTime) override;
 	void SetRigidbody(b2Body* body);
 	void CollisionCallback() override;
+	b2Body* GetRigidbody() { return rigidBody; }
 private:
 	Animation * idleAnimation;
 	Animation * flyingAnimation;
