@@ -42,49 +42,9 @@ void Line2D::SetRigidbody(b2Body * body)
 	rigidBody = body;
 }
 
-void Line2D::CreateRandomLine(int _length, int turretCount)
+void Line2D::CreateRandomLine(vector<b2Vec2> randomPoints)
 {
-	length = _length;
-	int turrets = turretCount;
-	float lastPoint = RandRange(-300, 300);
-	vector<b2Vec2> randomPoints;
-	b2Vec2 initialPoint = b2Vec2_zero;
-	randomPoints.push_back(initialPoint);
-	for (int i = 1; i < _length; i++)
-	{
-		b2Vec2 point;
-		if (RandRange(1, 100) < 20)
-		{
-			point = b2Vec2(100 * i, lastPoint);
-			if (platPoint == b2Vec2_zero && i > _length / 3)
-			{
-				if (RandRange(1, 100) > 20)
-				{
-					b2Vec2 vec = b2Vec2(100 * i-50, lastPoint);
-					platPoint = vec;
-				}
-			}
-			else
-			{
-				if (turrets != 0 && i > _length / 5)
-				{
-					if (RandRange(1, 100) > 60)
-					{
-						b2Vec2 vec = b2Vec2(100 * i-50, lastPoint);
-						turretsPoint.push_back(vec);
-						turrets--;
-					}
-				}
-			}
-		}
-		else
-		{
-			lastPoint = RandRange(-300, 300);
-			point = b2Vec2(100 * i, lastPoint);
-		}		
-		randomPoints.push_back(point);
 
-	}
 	SetLinesVertices(randomPoints);
 }
 

@@ -32,6 +32,7 @@ protected:
 	Bullet* bullet2;
 	float* coord;
 	float conta;
+	float RandRange(int _min, int _max);
 public:
 	Game(int _screenHeight, int _screenWidht, string _screenName);
 	~Game();

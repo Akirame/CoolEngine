@@ -61,34 +61,34 @@ c:\users\administrador\documents\github\coolengine\engineproject\enginedll\anima
           [
               _Ty=Animation *
           ]
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(17): warning C4251: 'Line2D::points': class 'std::vector<b2Vec2,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Line2D'
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(24): warning C4251: 'Line2D::points': class 'std::vector<b2Vec2,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Line2D'
           with
           [
               _Ty=b2Vec2
           ]
-  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(17): note: vea la declaración de 'std::vector<b2Vec2,std::allocator<_Ty>>'
+  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(18): note: vea la declaración de 'std::vector<b2Vec2,std::allocator<_Ty>>'
           with
           [
               _Ty=b2Vec2
           ]
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(18): warning C4251: 'Line2D::lineVertices': class 'std::vector<float,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Line2D'
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(25): warning C4251: 'Line2D::lineVertices': class 'std::vector<float,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Line2D'
           with
           [
               _Ty=float
           ]
-  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(18): note: vea la declaración de 'std::vector<float,std::allocator<_Ty>>'
+  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(25): note: vea la declaración de 'std::vector<float,std::allocator<_Ty>>'
           with
           [
               _Ty=float
           ]
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(25): warning C4251: 'Line2D::platPoint': struct 'b2Vec2' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Line2D'
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(26): warning C4251: 'Line2D::platPoint': struct 'b2Vec2' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Line2D'
   c:\users\administrador\documents\github\coolengine\engineproject\external\b2d\box2d\dynamics\b2worldcallbacks.h(24): note: vea la declaración de 'b2Vec2'
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(26): warning C4251: 'Line2D::turretsPoint': class 'std::vector<b2Vec2,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Line2D'
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(27): warning C4251: 'Line2D::turretsPoint': class 'std::vector<b2Vec2,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Line2D'
           with
           [
               _Ty=b2Vec2
           ]
-  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(17): note: vea la declaración de 'std::vector<b2Vec2,std::allocator<_Ty>>'
+  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(18): note: vea la declaración de 'std::vector<b2Vec2,std::allocator<_Ty>>'
           with
           [
               _Ty=b2Vec2
@@ -101,7 +101,7 @@ c:\users\administrador\documents\github\coolengine\engineproject\enginedll\tilem
           [
               _Ty=float
           ]
-  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(18): note: vea la declaración de 'std::vector<float,std::allocator<_Ty>>'
+  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(25): note: vea la declaración de 'std::vector<float,std::allocator<_Ty>>'
           with
           [
               _Ty=float
@@ -111,7 +111,7 @@ c:\users\administrador\documents\github\coolengine\engineproject\enginedll\tilem
           [
               _Ty=float
           ]
-  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(18): note: vea la declaración de 'std::vector<float,std::allocator<_Ty>>'
+  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(25): note: vea la declaración de 'std::vector<float,std::allocator<_Ty>>'
           with
           [
               _Ty=float
@@ -140,5 +140,11 @@ c:\users\administrador\documents\github\coolengine\engineproject\enginedll\turre
   c:\users\administrador\documents\github\coolengine\engineproject\external\b2d\box2d\dynamics\b2worldcallbacks.h(24): note: vea la declaración de 'b2Vec2'
 c:\users\administrador\documents\github\coolengine\engineproject\enginedll\bullet.h(25): warning C4251: 'Bullet::direction': struct 'b2Vec2' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Bullet'
   c:\users\administrador\documents\github\coolengine\engineproject\external\b2d\box2d\dynamics\b2worldcallbacks.h(24): note: vea la declaración de 'b2Vec2'
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\game.cpp(162): warning C4305: 'argumento': truncamiento de 'double' a 'float32'
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\game.cpp(10): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\game.cpp(22): warning C4244: 'return': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\game.cpp(51): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\game.cpp(56): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\game.cpp(66): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\game.cpp(76): warning C4244: 'argumento': conversión de 'int' a 'float32'; posible pérdida de datos
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\game.cpp(213): warning C4305: 'argumento': truncamiento de 'double' a 'float32'
   EngineProject.vcxproj -> C:\Users\Administrador\Documents\GitHub\CoolEngine\EngineProject\Debug\EngineProject.exe

@@ -14,14 +14,15 @@ public:
 	void SetMaterial(Material* _material) override;
 	void OnUpdate(float deltaTime) override {};
 	void OnCollision() override {};
-	vector<b2Vec2> points;
-	vector<float> lineVertices;
+
 	void SetLinesVertices(vector<b2Vec2> _lines);
 	b2Body* GetRigidbody();
 	void SetRigidbody(b2Body* body);
 	b2Body* rigidBody;
-	void CreateRandomLine(int _lenght, int turretCount);
+	void CreateRandomLine(vector<b2Vec2> randomPoints);
 	int length = 0;
+	vector<b2Vec2> points;
+	vector<float> lineVertices;
 	b2Vec2 platPoint = b2Vec2_zero;
 	vector<b2Vec2> turretsPoint;
 private:

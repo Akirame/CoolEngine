@@ -1,11 +1,13 @@
 #include "Game.h"
 #include "GLFW\glfw3.h"
 #include "GLFW\glfw3native.h"
-
+#include <ctime>
+#include <cstdlib>
 
 Game::Game(int _screenWidht, int _screenHeight, string _screenName): GameBase(_screenWidht, _screenHeight, _screenName)
 {	
 	loopCount = 0;
+	srand(time(0));
 }
 
 
@@ -14,8 +16,14 @@ Game::~Game()
 	delete world2D;
 }
 
+
+float Game::RandRange(int _min, int _max)
+{
+	return (rand() % _max) + _min;
+}
 bool Game::OnStart()
 {
+
 	cout << "Game::OnStart()" << endl;
 	mat = new Material();
 	tilemap = new Tilemap(renderer, screenHeight, screenWidth);
@@ -26,11 +34,54 @@ bool Game::OnStart()
 	player = new Player(renderer);
 	bullet1 = new Bullet(renderer);
 	turret = new Turret(renderer, world2D,player,bullet1);	
-	ground = new Line2D(renderer);
+	ground = new Line2D(renderer);	
+	
+	b2Vec2 platPoint = b2Vec2_zero;
+	vector<b2Vec2> turretsPoint;
+	int turrets = 1;
+	float lastPoint = RandRange(-300, 300);
+	vector<b2Vec2> randomPoints;
+	b2Vec2 initialPoint = b2Vec2_zero;
+	randomPoints.push_back(initialPoint);
+	for (int i = 1; i < LENGTH_TERRAIN; i++)
+	{
+		b2Vec2 point;
+		if (RandRange(1, 100) < 20)
+		{
+			point = b2Vec2(100 * i, lastPoint);
+			if (platPoint == b2Vec2_zero && i > LENGTH_TERRAIN / 3)
+			{
+				if (RandRange(1, 100) > 20)
+				{
+					b2Vec2 vec = b2Vec2(100 * i - 50, lastPoint);
+					platPoint = vec;
+				}
+			}
+			else
+			{
+				if (turrets != 0 && i > LENGTH_TERRAIN / 5)
+				{
+					if (RandRange(1, 100) > 60)
+					{
+						b2Vec2 vec = b2Vec2(100 * i - 50, lastPoint);
+						turretsPoint.push_back(vec);
+						turrets--;
+					}
+				}
+			}
+		}
+		else
+		{
+			lastPoint = RandRange(-300, 300);
+			point = b2Vec2(100 * i, lastPoint);
+		}
+		randomPoints.push_back(point);
+	}
+
 
 
 	// Ground
-	ground->CreateRandomLine(LENGTH_TERRAIN, 1);
+	ground->CreateRandomLine(randomPoints);
 	b2BodyDef chainDef;
 	chainDef.type = b2_staticBody;
 	chainDef.position.Set(0, -35); //set the starting position
@@ -65,9 +116,9 @@ bool Game::OnStart()
 	player->SetRigidbody(playerRigid);
 	// Body def platform
 	b2BodyDef myBodyDefPlat;
-	myBodyDefPlat.type = b2_staticBody; //this will be a static body
-	myBodyDefPlat.position.Set(ground->platPoint.x,ground->platPoint.y); //set the starting position
+	myBodyDefPlat.type = b2_staticBody; //this will be a static body	
 	myBodyDefPlat.angle = 0; //set the starting angle
+	myBodyDefPlat.position.Set(platPoint.x, platPoint.y);
 	b2PolygonShape boxShapePlat;
 	boxShapePlat.SetAsBox(40, 40);
 	b2FixtureDef boxFixtureDefPlat;
@@ -78,9 +129,9 @@ bool Game::OnStart()
 	landingPlatform->SetRigidbody(platRigid);
 	// Body def turrets
 	b2BodyDef myBodyDefTurret;
-	myBodyDefTurret.type = b2_staticBody;
-	myBodyDefTurret.position.Set(ground->turretsPoint[0].x, ground->turretsPoint[0].y);
+	myBodyDefTurret.type = b2_staticBody;	
 	myBodyDefTurret.gravityScale = 0.0f;
+	myBodyDefTurret.position.Set(turretsPoint[0].x, turretsPoint[0].y);
 	myBodyDefTurret.angle = 0;
 	b2PolygonShape boxShapeTurret;
 	boxShapeTurret.SetAsBox(40, 40);
