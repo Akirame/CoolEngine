@@ -35,7 +35,6 @@ void Player::OnUpdate(float deltaTime)
 	// Strafe right
 	if (glfwGetKey((GLFWwindow*)renderer->window->GetWindowPrt(), GLFW_KEY_RIGHT) == GLFW_PRESS) {
 		angleRotation -= deltaTime * 1;
-		rigidBody->SetLinearVelocity(b2Vec2(0, 0));
 	}
 	// Strafe left
 	if (glfwGetKey((GLFWwindow*)renderer->window->GetWindowPrt(), GLFW_KEY_LEFT) == GLFW_PRESS) {

@@ -33,13 +33,13 @@ bool Game::OnStart()
 	ground->CreateRandomLine(LENGTH_TERRAIN, 1);
 	b2BodyDef chainDef;
 	chainDef.type = b2_staticBody;
-	chainDef.position.Set(0, 0); //set the starting position
+	chainDef.position.Set(0, -35); //set the starting position
 	chainDef.userData = &ground;
 	b2ChainShape chain;
 	b2Vec2 points[LENGTH_TERRAIN];
 	for (int i = 0; i < LENGTH_TERRAIN; i++)
 	{
-		points[i].Set(ground->points[i].x, ground->points[i].y - 15);
+		points[i].Set(ground->points[i].x, ground->points[i].y);
 	}
 	chain.CreateChain(points, LENGTH_TERRAIN);
 	b2FixtureDef chainFixture;
@@ -54,16 +54,15 @@ bool Game::OnStart()
 	myBodyDef.type = b2_dynamicBody; //this will be a dynamic body
 	myBodyDef.position.Set(350, 250); //set the starting position
 	myBodyDef.angle = 90; //set the starting angle
-	myBodyDef.gravityScale = 0.9f;	
+	myBodyDef.gravityScale = 1.0f;	
 	b2PolygonShape boxShape;
-	boxShape.SetAsBox(40, 40);		
+	boxShape.SetAsBox(30, 30);		
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
 	boxFixtureDef.density = 1;
 	b2Body* playerRigid = world2D->CreateBody(&myBodyDef);
 	playerRigid->CreateFixture(&boxFixtureDef);
 	player->SetRigidbody(playerRigid);
-	player->CreateCollider(280, 40, false, false);
 	// Body def platform
 	b2BodyDef myBodyDefPlat;
 	myBodyDefPlat.type = b2_staticBody; //this will be a static body

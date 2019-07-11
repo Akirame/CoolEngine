@@ -1,4 +1,4 @@
-﻿  Bullet.cpp
+﻿  Player.cpp
 c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(12): warning C4251: 'Renderer::model': struct 'glm::mat<4,4,float,0>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Renderer'
   c:\users\administrador\documents\github\coolengine\engineproject\external\glm-0.9.9.0\glm\detail\type_mat.hpp(303): note: vea la declaración de 'glm::mat<4,4,float,0>'
 c:\users\administrador\documents\github\coolengine\engineproject\enginedll\renderer.h(13): warning C4251: 'Renderer::view': struct 'glm::mat<4,4,float,0>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Renderer'
@@ -37,8 +37,6 @@ c:\users\administrador\documents\github\coolengine\engineproject\enginedll\anima
           [
               _Ty=Animation *
           ]
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\bullet.h(25): warning C4251: 'Bullet::direction': struct 'b2Vec2' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Bullet'
-  c:\users\administrador\documents\github\coolengine\engineproject\external\b2d\box2d\dynamics\b2worldcallbacks.h(24): note: vea la declaración de 'b2Vec2'
 c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(17): warning C4251: 'Line2D::points': class 'std::vector<b2Vec2,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Line2D'
           with
           [
@@ -73,6 +71,45 @@ c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2
           ]
 c:\users\administrador\documents\github\coolengine\engineproject\enginedll\player.h(23): warning C4251: 'Player::direction': struct 'b2Vec2' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Player'
   c:\users\administrador\documents\github\coolengine\engineproject\external\b2d\box2d\dynamics\b2worldcallbacks.h(24): note: vea la declaración de 'b2Vec2'
-c:\users\administrador\documents\github\coolengine\engineproject\enginedll\turret.h(25): warning C4251: 'Turret::direction': struct 'b2Vec2' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Turret'
-  c:\users\administrador\documents\github\coolengine\engineproject\external\b2d\box2d\dynamics\b2worldcallbacks.h(24): note: vea la declaración de 'b2Vec2'
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\tilemap.h(2): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\tilemap.h(20): warning C4251: 'Tilemap::vertexArrayPos': class 'std::vector<float,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Tilemap'
+          with
+          [
+              _Ty=float
+          ]
+  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(18): note: vea la declaración de 'std::vector<float,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=float
+          ]
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\tilemap.h(21): warning C4251: 'Tilemap::vertexArrayUV': class 'std::vector<float,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Tilemap'
+          with
+          [
+              _Ty=float
+          ]
+  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\line2d.h(18): note: vea la declaración de 'std::vector<float,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=float
+          ]
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\tilemap.h(22): warning C4251: 'Tilemap::tilesWithCollides': class 'std::vector<int,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Tilemap'
+          with
+          [
+              _Ty=int
+          ]
+  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\tilemap.h(22): note: vea la declaración de 'std::vector<int,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=int
+          ]
+c:\users\administrador\documents\github\coolengine\engineproject\enginedll\tilemap.h(46): warning C4251: 'Tilemap::indexes': class 'std::vector<std::vector<int,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Tilemap'
+          with
+          [
+              _Ty=int
+          ]
+  c:\users\administrador\documents\github\coolengine\engineproject\enginedll\tilemap.h(46): note: vea la declaración de 'std::vector<std::vector<int,std::allocator<_Ty>>,std::allocator<std::vector<_Ty,std::allocator<_Ty>>>>'
+          with
+          [
+              _Ty=int
+          ]
   EngineDLL.vcxproj -> C:\Users\Administrador\Documents\GitHub\CoolEngine\EngineProject\Debug\EngineDLL.dll
