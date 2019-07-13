@@ -1,9 +1,9 @@
 #include "Component.h"
 #include "EntityNode.h"
-Component::Component(EntityNode* entity) 
+Component::Component(EntityNode* _entity) 
 {
 	SetType(ComponentType::DEFAULT);
-	m_entity = entity;
+	entity = _entity;
 }
 
 Component::~Component() {

@@ -1,35 +1,35 @@
 #include "SceneNode.h"
 #include "Transform.h"
 
-void SceneNode::SetParent(SceneNode* parent) 
+void SceneNode::SetParent(SceneNode* _parent)
 {
-	m_parent = parent;
+	parent = _parent;
 }
 
 void SceneNode::AddNode(SceneNode* node) 
 {
 	if (node != nullptr) {
-		m_children.push_back(node);
+		children.push_back(node);
 		node->SetParent(this);
 	}
 }
 
 void SceneNode::Update(float deltaTime) 
 {
-	for (std::vector<Component*>::iterator iter = m_componentList.begin();
-		iter != m_componentList.end(); iter++) {
+	for (std::vector<Component*>::iterator iter = componentList.begin();
+		iter != componentList.end(); iter++) {
 		(*iter)->Update(deltaTime);
 	}
 
-	for (std::vector<SceneNode*>::iterator iter = m_children.begin();
-		iter != m_children.end(); iter++) {
+	for (std::vector<SceneNode*>::iterator iter = children.begin();
+		iter != children.end(); iter++) {
 		(*iter)->Update(deltaTime);
 	}
 }
 
 Component* SceneNode::GetComponent(ComponentType componentType) {
-	for (std::vector<Component*>::iterator iter = m_componentList.begin();
-		iter != m_componentList.end(); iter++) {
+	for (std::vector<Component*>::iterator iter = componentList.begin();
+		iter != componentList.end(); iter++) {
 		if ((*iter)->GetType() == componentType)
 			return *iter;
 	}
@@ -43,13 +43,13 @@ SceneNode::~SceneNode()
 
 void SceneNode::Destroy() 
 {
-	for (std::vector<SceneNode*>::iterator iter = m_children.begin();
-		iter != m_children.end(); iter++) 
+	for (std::vector<SceneNode*>::iterator iter = children.begin();
+		iter != children.end(); iter++) 
 	{
 		if ((*iter) != nullptr)
 			(*iter)->Release();
 	}
-	m_children.clear();
+	children.clear();
 }
 
 void SceneNode::Release() 
@@ -59,17 +59,17 @@ void SceneNode::Release()
 
 SceneNode* SceneNode::GetParent() 
 {
-	return m_parent;
+	return parent;
 }
 
 Transform* SceneNode::GetTransform() 
 {
-	return m_transform;
+	return transform;
 }
 
 SceneNode* SceneNode::GetChildrenByIndex(int index) 
 {
-	if (index >= 0 && index < m_children.size())
-		return m_children[index];
+	if (index >= 0 && index < children.size())
+		return children[index];
 	return nullptr;
 }

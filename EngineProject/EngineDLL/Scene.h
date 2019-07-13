@@ -15,7 +15,7 @@ private:
 	float rotationSpeed;
 
 public:
-	Scene(Renderer* renderer, Camera* _camera);
+	Scene(Renderer* _renderer, Camera* _camera);
 	~Scene();
 
 	void Update(float deltaTime) override;

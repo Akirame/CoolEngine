@@ -16,7 +16,7 @@ class ENGINEDLL_API Mesh :
 	public Component
 {
 public:
-	Mesh(EntityNode* entity, Renderer* _renderer);
+	Mesh(EntityNode* _entity, Renderer* _renderer);
 	~Mesh();
 	void Draw();
 	virtual void SetMaterial(Material* _material);
@@ -25,27 +25,27 @@ public:
 	void SetTexture(const char * imagepath);	
 	void Update(float deltaTime) override;
 	bool LoadModel(const char* filePath);
-	void ProcessMesh(aiMesh* mesh);
+	void ProcessMesh(aiMesh* _mesh);
 	void GenerateBuffers();
 protected:
 	std::vector<ModelData> models;
-	Material* m_material;
-	Renderer* m_renderer;
+	Material* material;
+	Renderer* renderer;
 	unsigned int programID;
 	bool shouldDispose;
 	unsigned int texture;
-	void FillVBOinfo(aiMesh* mesh);
-	void FillFaceIndices(aiMesh* mesh);
-	bool LoadModelWithAssimp(const char* filePath);
-	void ProcessNode(aiNode* node, const aiScene* scene, int& nodeIndex);
+	void FillVBOinfo(aiMesh* _mesh);
+	void FillFaceIndices(aiMesh* _mesh);
+	bool LoadModelWithAssimp(const char* _filePath);
+	void ProcessNode(aiNode* _node, const aiScene* _scene, int& _nodeIndex);
 
-	unsigned int m_vertexBuffer;
-	unsigned int m_uvBuffer;	
-	unsigned int m_elementsBuffer;
+	unsigned int vertexBuffer;
+	unsigned int uvBuffer;	
+	unsigned int elementsBuffer;
 
-	std::vector<unsigned int> m_indices;
-	std::vector<float> m_indexedVertices;
-	std::vector<float> m_indexedUVs;
-	const char* m_texturePath;
+	std::vector<unsigned int> indices;
+	std::vector<float> indexedVertices;
+	std::vector<float> indexedUVs;
+	const char* texturePath;
 	int conta = 0;
 };

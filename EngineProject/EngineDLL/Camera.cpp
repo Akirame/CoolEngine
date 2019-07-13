@@ -4,15 +4,15 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 
-Camera::Camera(Renderer* renderer, Window* window) : EntityNode(renderer) 
+Camera::Camera(Renderer* _renderer, Window* _window) : EntityNode(_renderer)
 {
-	m_Renderer = renderer;
-	m_Window = window;
+	renderer = _renderer;
+	window   = _window;
 
-	m_CameraTarget = glm::vec3(0, 0, 0);
-	m_strafeSpeed = 5.0f;
-	m_RotationSpeed = 100.0f;
-	m_transform->Yaw(180);
+	cameraTarget  = glm::vec3(0, 0, 0);
+	strafeSpeed   = 5.0f;
+	rotationSpeed = 100.0f;
+	transform->Yaw(180);
 
 	UpdateViewMatrix();
 }
@@ -28,49 +28,49 @@ void Camera::Update(float deltaTime)
 
 void Camera::CheckForMovementInput(float deltaTime) 
 {
-	float movementSpeed = m_strafeSpeed * deltaTime;
-	GLFWwindow* window = (GLFWwindow*)m_Window->GetWindowPtr();
+	float movementSpeed = strafeSpeed * deltaTime;
+	GLFWwindow* mWindow = (GLFWwindow*)window->GetWindowPtr();
 
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) // Move forward
-		m_transform->Walk(movementSpeed);
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) // Move backward
-		m_transform->Walk(-movementSpeed);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) // Strafe right
-		m_transform->Strafe(movementSpeed);
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) // Strafe left
-		m_transform->Strafe(-movementSpeed);
-	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) // Strafe left
-		m_transform->Elevate(movementSpeed);
-	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) // Strafe left
-		m_transform->Elevate(-movementSpeed);
+	if (glfwGetKey(mWindow, GLFW_KEY_W) == GLFW_PRESS) // Move forward
+		transform->Walk(movementSpeed);
+	if (glfwGetKey(mWindow, GLFW_KEY_S) == GLFW_PRESS) // Move backward
+		transform->Walk(-movementSpeed);
+	if (glfwGetKey(mWindow, GLFW_KEY_D) == GLFW_PRESS) // Strafe right
+		transform->Strafe(movementSpeed);
+	if (glfwGetKey(mWindow, GLFW_KEY_A) == GLFW_PRESS) // Strafe left
+		transform->Strafe(-movementSpeed);
+	if (glfwGetKey(mWindow, GLFW_KEY_R) == GLFW_PRESS) // Strafe left
+		transform->Elevate(movementSpeed);
+	if (glfwGetKey(mWindow, GLFW_KEY_F) == GLFW_PRESS) // Strafe left
+		transform->Elevate(-movementSpeed);
 }
 
 void Camera::CheckForRotationInput(float deltaTime) 
 {
-	GLFWwindow* window = (GLFWwindow*)m_Window->GetWindowPtr();
+	GLFWwindow* mWindow = (GLFWwindow*)window->GetWindowPtr();
 
-	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-		m_transform->Yaw(-m_RotationSpeed * deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-		m_transform->Yaw(m_RotationSpeed * deltaTime);
+	if (glfwGetKey(mWindow, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		transform->Yaw(-rotationSpeed * deltaTime);
+	if (glfwGetKey(mWindow, GLFW_KEY_LEFT) == GLFW_PRESS)
+		transform->Yaw(rotationSpeed * deltaTime);
 
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-		m_transform->Pitch(-m_RotationSpeed * deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		m_transform->Pitch(m_RotationSpeed * deltaTime);
+	if (glfwGetKey(mWindow, GLFW_KEY_UP) == GLFW_PRESS)
+		transform->Pitch(-rotationSpeed * deltaTime);
+	if (glfwGetKey(mWindow, GLFW_KEY_DOWN) == GLFW_PRESS)
+		transform->Pitch(rotationSpeed * deltaTime);
 
-	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-		m_transform->Roll(m_RotationSpeed * deltaTime);
-	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-		m_transform->Roll(-m_RotationSpeed * deltaTime);
+	if (glfwGetKey(mWindow, GLFW_KEY_E) == GLFW_PRESS)
+		transform->Roll(rotationSpeed * deltaTime);
+	if (glfwGetKey(mWindow, GLFW_KEY_Q) == GLFW_PRESS)
+		transform->Roll(-rotationSpeed * deltaTime);
 }
 
 void Camera::UpdateViewMatrix() 
 {
-	m_ViewMat = glm::lookAt(
-		m_transform->GetPosition(),
-		m_transform->GetPosition() + m_transform->foward,
-		m_transform->up
+	viewMat = glm::lookAt(
+		transform->GetPosition(),
+		transform->GetPosition() + transform->foward,
+		transform->up
 	);
-	m_Renderer->SetViewMatrix(m_ViewMat);
+	renderer->SetViewMatrix(viewMat);
 }

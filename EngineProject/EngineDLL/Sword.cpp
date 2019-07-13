@@ -3,7 +3,7 @@
 #include "Mesh.h"
 #include "Transform.h"
 
-Sword::Sword(Renderer* renderer) : EntityNode(renderer) 
+Sword::Sword(Renderer* _renderer) : EntityNode(_renderer)
 {
 	material = new Material();
 	mesh = new Mesh(this,renderer);

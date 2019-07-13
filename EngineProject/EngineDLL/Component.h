@@ -12,16 +12,16 @@ enum ComponentType {
 
 class ENGINEDLL_API Component {
 private:
-	ComponentType m_type;
+	ComponentType type;
 
 protected:
-	EntityNode * m_entity;
-	void SetType(ComponentType type) { m_type = type; }
+	EntityNode * entity;
+	void SetType(ComponentType _type) { type = _type; }
 
 public:
-	Component(EntityNode* entity);
+	Component(EntityNode* _entity);
 	~Component();
 
 	virtual void Update(float deltaTime) = 0;
-	const ComponentType GetType() { return m_type; }
+	const ComponentType GetType() { return type; }
 };

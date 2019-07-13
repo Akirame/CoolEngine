@@ -5,19 +5,19 @@ glm::vec3 World::up = glm::vec3(0, 1, 0);
 glm::vec3 World::right = glm::vec3(1, 0, 0);
 glm::vec3 World::foward = glm::vec3(0, 0, 1);
 
-Transform::Transform(EntityNode* entity) : Component(entity) 
+Transform::Transform(EntityNode* _entity) : Component(_entity)
 {
 	SetType(ComponentType::TRANSFORM);
 
-	m_modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::mat4(1.0f);
 
-	m_translateMatrix = glm::mat4(1.0f);
-	m_rotateMatrix = glm::mat4(1.0f);
-	m_scaleMatrix = glm::mat4(1.0f);
+	translateMatrix = glm::mat4(1.0f);
+	rotateMatrix = glm::mat4(1.0f);
+	scaleMatrix = glm::mat4(1.0f);
 
-	m_position = glm::vec3(0.0f);
-	m_scale = glm::vec3(1.0f);
-	m_rotation = glm::vec3(0.0f);
+	position = glm::vec3(0.0f);
+	scale = glm::vec3(1.0f);
+	rotation = glm::vec3(0.0f);
 
 	right = World::right;
 	foward = World::foward;
@@ -30,82 +30,82 @@ void Transform::Update(float deltaTime)
 }
 
 void Transform::UpdateModelMatrix() {
-	m_modelMatrix = m_translateMatrix * m_rotateMatrix * m_scaleMatrix;
+	modelMatrix = translateMatrix * rotateMatrix * scaleMatrix;
 
-	if (m_entity->GetParent() != nullptr) 
+	if (entity->GetParent() != nullptr) 
 	{
-		Transform* parentTransform = m_entity->GetParent()->GetTransform();
-		m_modelMatrix = parentTransform->GetModelMatrix() * m_modelMatrix;
+		Transform* parentTransform = entity->GetParent()->GetTransform();
+		modelMatrix = parentTransform->GetModelMatrix() * modelMatrix;
 	}
 }
 
-void Transform::SetPosition(const glm::vec3& position) 
+void Transform::SetPosition(const glm::vec3& _position)
 {
-	m_position = position;
-	m_translateMatrix = glm::translate(glm::mat4(1.0f), m_position);
+	position = _position;
+	translateMatrix = glm::translate(glm::mat4(1.0f), position);
 }
 
 void Transform::SetPosition(float x, float y, float z) 
 {
-	m_position = glm::vec3(x, y, z);
-	m_translateMatrix = glm::translate(glm::mat4(1.0f), m_position);
+	position = glm::vec3(x, y, z);
+	translateMatrix = glm::translate(glm::mat4(1.0f), position);
 }
 
-void Transform::SetScale(const glm::vec3& scale) 
+void Transform::SetScale(const glm::vec3& _scale)
 {
-	m_scale = scale;
-	m_scaleMatrix = glm::scale(glm::mat4(1.0f), m_scale);
+	scale = _scale;
+	scaleMatrix = glm::scale(glm::mat4(1.0f), scale);
 }
 
 void Transform::SetScale(float x, float y, float z) 
 {
-	m_scale = glm::vec3(x, y, z);
-	m_scaleMatrix = glm::scale(glm::mat4(1.0f), m_scale);
+	scale = glm::vec3(x, y, z);
+	scaleMatrix = glm::scale(glm::mat4(1.0f), scale);
 }
 
 void Transform::Walk(float speed) 
 {
-	m_position += foward * speed;
+	position += foward * speed;
 }
 
 void Transform::Strafe(float speed) 
 {
-	m_position += right * speed;
+	position += right * speed;
 }
 
 void Transform::Elevate(float speed) 
 {
-	m_position += up * speed;
+	position += up * speed;
 }
 void Transform::Pitch(float angle) 
 {
-	m_rotation.x = angle;
-	m_rotateMatrix *= glm::rotate(glm::mat4(1.0f), glm::radians(m_rotation.x), World::right);
+	rotation.x = angle;
+	rotateMatrix *= glm::rotate(glm::mat4(1.0f), glm::radians(rotation.x), World::right);
 	UpdateUnitVectors();
 }
 
 void Transform::Yaw(float angle) {
-	m_rotation.y = angle;
-	m_rotateMatrix *= glm::rotate(glm::mat4(1.0f), glm::radians(m_rotation.y), World::up);
+	rotation.y = angle;
+	rotateMatrix *= glm::rotate(glm::mat4(1.0f), glm::radians(rotation.y), World::up);
 	UpdateUnitVectors();
 }
 
 void Transform::Roll(float angle) {
-	m_rotation.z = angle;
-	m_rotateMatrix *= glm::rotate(glm::mat4(1.0f), glm::radians(m_rotation.z), World::foward);
+	rotation.z = angle;
+	rotateMatrix *= glm::rotate(glm::mat4(1.0f), glm::radians(rotation.z), World::foward);
 	UpdateUnitVectors();
 }
 
 void Transform::UpdateUnitVectors() 
 {
 	glm::vec4 newFoward = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
-	newFoward = m_rotateMatrix * newFoward;
+	newFoward = rotateMatrix * newFoward;
 	foward.x = newFoward.x;
 	foward.y = newFoward.y;
 	foward.z = newFoward.z;
 
 	glm::vec4 newUp = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
-	newUp = m_rotateMatrix * newUp;
+	newUp = rotateMatrix * newUp;
 	up.x = newUp.x;
 	up.y = newUp.y;
 	up.z = newUp.z;

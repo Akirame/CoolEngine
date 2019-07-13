@@ -1,14 +1,14 @@
 #include "Scene.h"
 #include "Transform.h"
 
-Scene::Scene(Renderer* renderer, Camera* _camera) : EntityNode(renderer) 
+Scene::Scene(Renderer* _renderer, Camera* _camera) : EntityNode(_renderer)
 {
 	camera = camera;
 }
 
 bool Scene::Start() 
 {
-	sw1 = new Sword(m_renderer);	
+	sw1 = new Sword(renderer);	
 	sw1->GetTransform()->SetPosition(0, -5, -5);
 	AddNode(sw1);
 	return true;

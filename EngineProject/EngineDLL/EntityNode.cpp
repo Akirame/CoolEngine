@@ -3,14 +3,14 @@
 
 EntityNode::EntityNode(Renderer* _renderer) 
 {
-	m_renderer = _renderer;
-	m_transform = new Transform(this);
-	AddComponent(m_transform);
+	renderer = _renderer;
+	transform = new Transform(this);
+	AddComponent(transform);
 }
 
 EntityNode::~EntityNode() 
 {
-	if (m_transform != nullptr) delete m_transform;
+	if (transform != nullptr) delete transform;
 }
 
 void EntityNode::Update(float deltaTime) 

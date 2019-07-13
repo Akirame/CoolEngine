@@ -11,11 +11,11 @@
 #include <assimp/postprocess.h>
 
 
-Mesh::Mesh(EntityNode* entity, Renderer* _renderer) :
-	Component(entity)
+Mesh::Mesh(EntityNode* _entity, Renderer* _renderer) :
+	Component(_entity)
 {
 	SetType(ComponentType::MESH);
-	m_renderer = _renderer;
+	renderer = _renderer;
 	shouldDispose = false;
 }
 Mesh::~Mesh()
@@ -24,54 +24,52 @@ Mesh::~Mesh()
 }
 void Mesh::SetTexture(const char * imagepath)
 {
-	m_texturePath = imagepath;
+	texturePath = imagepath;
 	texture = TextureImporter::loadBMP_custom(imagepath);
 }
 void Mesh::Draw()
 {
-	m_renderer->SetModelMatrix(m_entity->GetTransform()->GetModelMatrix());
+	renderer->SetModelMatrix(entity->GetTransform()->GetModelMatrix());
 	
-	if (m_material)
+	if (material)
 	{
 		BindMaterial();
-		m_material->SetMatrixProperty("MVP", m_renderer->GetMVP());		
+		material->SetMatrixProperty("MVP", renderer->GetMVP());		
 		if (texture)
 		{
-			m_material->SetTextureProperty("myTextureSampler", texture);;
+			material->SetTextureProperty("myTextureSampler", texture);;
 		}
 	}
-	m_renderer->EnableBuffer(0);
-	m_renderer->BindBuffer(m_vertexBuffer,3,0);
+	renderer->EnableBuffer(0);
+	renderer->BindBuffer(vertexBuffer,3,0);
 
-	m_renderer->EnableBuffer(1);
-	m_renderer->BindBuffer(m_uvBuffer,2,1);
+	renderer->EnableBuffer(1);
+	renderer->BindBuffer(uvBuffer,2,1);
 
-	m_renderer->BindElementBuffer(m_elementsBuffer);
+	renderer->BindElementBuffer(elementsBuffer);
 
-	m_renderer->DrawElements(m_indices.size());
+	renderer->DrawElements(indices.size());
 
-	m_renderer->DisableBuffer(0);
-	m_renderer->DisableBuffer(1);	
+	renderer->DisableBuffer(0);
+	renderer->DisableBuffer(1);	
 }
 void Mesh::Dispose()
 {
 }
 void Mesh::SetMaterial(Material* _material)
 {
-	m_material = _material;
-	programID = m_material->LoadShaders("TextureVertexShader.txt", "TextureFragmentShader.txt");
+	material = _material;
+	programID = material->LoadShaders("TextureVertexShader.txt", "TextureFragmentShader.txt");
 }
 void Mesh::BindMaterial()
 {
-	m_renderer->BindMaterial(programID);
+	renderer->BindMaterial(programID);
 }
 
 void Mesh::Update(float deltaTime) 
 {
 	Draw();
 }
-
-
 
 bool Mesh::LoadModel(const char* filePath) 
 {
@@ -107,14 +105,14 @@ bool Mesh::LoadModelWithAssimp(const char* filePath)
 void Mesh::ProcessNode(aiNode* node, const aiScene* scene, int& nodeIndex) 
 {	
 	conta++;
-	EntityNode* entity = new EntityNode(m_renderer);
-	Mesh* mesh = new Mesh(entity, m_renderer);
-	mesh->SetTexture(m_texturePath);
-	mesh->SetMaterial(m_material);
+	EntityNode* mEntity = new EntityNode(renderer);
+	Mesh* mesh = new Mesh(mEntity, renderer);
+	mesh->SetTexture(texturePath);
+	mesh->SetMaterial(material);
 	mesh->ProcessMesh(scene->mMeshes[nodeIndex]);
 	mesh->GenerateBuffers();
-	entity->AddComponent(mesh);
-	m_entity->AddNode(entity);
+	mEntity->AddComponent(mesh);
+	entity->AddNode(mEntity);
 
 	for (nodeIndex; nodeIndex < node->mNumChildren; nodeIndex++) 
 	{
@@ -130,37 +128,35 @@ void Mesh::ProcessMesh(aiMesh* mesh)
 
 void Mesh::FillVBOinfo(aiMesh* mesh) 
 {
-	m_indexedVertices.reserve(mesh->mNumVertices);
-	m_indexedUVs.reserve(mesh->mNumVertices);
+	indexedVertices.reserve(mesh->mNumVertices);
+	indexedUVs.reserve(mesh->mNumVertices);
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++) 
 	{
 		aiVector3D pos = mesh->mVertices[i];
-		m_indexedVertices.push_back(pos.x);
-		m_indexedVertices.push_back(pos.y);
-		m_indexedVertices.push_back(pos.z);
+		indexedVertices.push_back(pos.x);
+		indexedVertices.push_back(pos.y);
+		indexedVertices.push_back(pos.z);
 
 		aiVector3D UVW = mesh->mTextureCoords[0][i]; // Assume only 1 set of UV coords; AssImp supports 8 UV sets.
-		m_indexedUVs.push_back(UVW.x);
-		m_indexedUVs.push_back(UVW.y);
+		indexedUVs.push_back(UVW.x);
+		indexedUVs.push_back(UVW.y);
 	}
 }
 
 void Mesh::FillFaceIndices(aiMesh* mesh) 
 {
-	m_indices.reserve(3 * mesh->mNumFaces);
+	indices.reserve(3 * mesh->mNumFaces);
 	for (unsigned int i = 0; i < mesh->mNumFaces; i++) 
 	{
-		m_indices.push_back(mesh->mFaces[i].mIndices[0]);
-		m_indices.push_back(mesh->mFaces[i].mIndices[1]);
-		m_indices.push_back(mesh->mFaces[i].mIndices[2]);
+		indices.push_back(mesh->mFaces[i].mIndices[0]);
+		indices.push_back(mesh->mFaces[i].mIndices[1]);
+		indices.push_back(mesh->mFaces[i].mIndices[2]);
 	}
 }
 
 void Mesh::GenerateBuffers() 
 {
-	vector<float> indexedVertices;
-	vector<float> indexedUVs;
-	m_vertexBuffer = m_renderer->GenBuffer(&m_indexedVertices[0], m_indexedVertices.size() * sizeof(float));
-	m_uvBuffer = m_renderer->GenBuffer(&m_indexedUVs[0], m_indexedUVs.size() * sizeof(float));	
-	m_elementsBuffer = m_renderer->GenBufferIndex(&m_indices[0], m_indices.size() * sizeof(unsigned int));
+	vertexBuffer = renderer->GenBuffer(&indexedVertices[0], indexedVertices.size() * sizeof(float));
+	uvBuffer = renderer->GenBuffer(&indexedUVs[0], indexedUVs.size() * sizeof(float));	
+	elementsBuffer = renderer->GenBufferIndex(&indices[0], indices.size() * sizeof(unsigned int));
 }

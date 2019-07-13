@@ -12,21 +12,21 @@
 
 class ENGINEDLL_API Camera : public EntityNode {
 private:
-	Renderer * m_Renderer;
-	Window* m_Window;
+	Renderer * renderer;
+	Window* window;
 
-	glm::vec3 m_CameraTarget;
-	glm::mat4 m_ViewMat;
+	glm::vec3 cameraTarget;
+	glm::mat4 viewMat;
 
-	float m_strafeSpeed;
-	float m_RotationSpeed;
+	float strafeSpeed;
+	float rotationSpeed;
 
 	void UpdateViewMatrix();
 	void CheckForMovementInput(float deltaTime);
 	void CheckForRotationInput(float deltaTime);
 
 public:
-	Camera(Renderer* renderer, Window* window);
+	Camera(Renderer* _renderer, Window* _window);
 	~Camera() { }
 
 	void Update(float deltaTime) override;

@@ -11,14 +11,14 @@ private:
 	void SetParent(SceneNode* parent);
 
 protected:
-	Transform * m_transform;
-	SceneNode* m_parent;
+	Transform * transform;
+	SceneNode* parent;
 
-	std::vector<SceneNode*> m_children;
-	std::vector<Component*> m_componentList;
+	std::vector<SceneNode*> children;
+	std::vector<Component*> componentList;
 
 public:
-	SceneNode() : m_parent(nullptr), m_transform(nullptr) {	}
+	SceneNode() : parent(nullptr), transform(nullptr) {	}
 
 	virtual ~SceneNode();
 	void Release();
@@ -27,7 +27,7 @@ public:
 	void Destroy();
 	void AddNode(SceneNode* node);
 
-	void AddComponent(Component* component) { m_componentList.push_back(component); }
+	void AddComponent(Component* component) { componentList.push_back(component); }
 	Component* GetComponent(ComponentType componentType);
 
 	SceneNode* GetParent();

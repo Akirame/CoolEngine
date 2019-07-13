@@ -4,7 +4,7 @@
 
 class ENGINEDLL_API EntityNode : public SceneNode {
 protected:
-	Renderer * m_renderer;
+	Renderer * renderer;
 
 public:
 	EntityNode(Renderer* _renderer);
