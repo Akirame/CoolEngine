@@ -10,7 +10,7 @@ Sword::Sword(Renderer* _renderer) : EntityNode(_renderer)
 	mesh->SetMaterial(material);
 
 	mesh->SetTexture("uvtemplate.bmp");
-	mesh->LoadModel("crysis.obj");
+	mesh->LoadModel("tank.obj");
 	AddComponent(mesh);
 }
 
