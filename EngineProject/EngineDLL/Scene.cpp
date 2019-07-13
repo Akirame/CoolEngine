@@ -1,18 +1,21 @@
 #include "Scene.h"
 #include "Transform.h"
 
-Scene::Scene(Renderer* renderer, Camera* _camera) : EntityNode(renderer) {
+Scene::Scene(Renderer* renderer, Camera* _camera) : EntityNode(renderer) 
+{
 	camera = camera;
 }
 
-bool Scene::Start() {
+bool Scene::Start() 
+{
 	sw1 = new Sword(m_renderer);	
 	sw1->GetTransform()->SetPosition(0, -5, -5);
 	AddNode(sw1);
 	return true;
 }
 
-void Scene::Update(float deltaTime) {
+void Scene::Update(float deltaTime) 
+{
 	rotationSpeed += 30 * deltaTime;	
 
 

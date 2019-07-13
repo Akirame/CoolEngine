@@ -4,7 +4,8 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 
-Camera::Camera(Renderer* renderer, Window* window) : EntityNode(renderer) {
+Camera::Camera(Renderer* renderer, Window* window) : EntityNode(renderer) 
+{
 	m_Renderer = renderer;
 	m_Window = window;
 
@@ -16,7 +17,8 @@ Camera::Camera(Renderer* renderer, Window* window) : EntityNode(renderer) {
 	UpdateViewMatrix();
 }
 
-void Camera::Update(float deltaTime) {
+void Camera::Update(float deltaTime) 
+{
 	EntityNode::Update(deltaTime);
 
 	CheckForMovementInput(deltaTime);
@@ -24,7 +26,8 @@ void Camera::Update(float deltaTime) {
 	UpdateViewMatrix();
 }
 
-void Camera::CheckForMovementInput(float deltaTime) {
+void Camera::CheckForMovementInput(float deltaTime) 
+{
 	float movementSpeed = m_strafeSpeed * deltaTime;
 	GLFWwindow* window = (GLFWwindow*)m_Window->GetWindowPtr();
 
@@ -36,9 +39,14 @@ void Camera::CheckForMovementInput(float deltaTime) {
 		m_transform->Strafe(movementSpeed);
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) // Strafe left
 		m_transform->Strafe(-movementSpeed);
+	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) // Strafe left
+		m_transform->Elevate(movementSpeed);
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) // Strafe left
+		m_transform->Elevate(-movementSpeed);
 }
 
-void Camera::CheckForRotationInput(float deltaTime) {
+void Camera::CheckForRotationInput(float deltaTime) 
+{
 	GLFWwindow* window = (GLFWwindow*)m_Window->GetWindowPtr();
 
 	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
@@ -57,7 +65,8 @@ void Camera::CheckForRotationInput(float deltaTime) {
 		m_transform->Roll(-m_RotationSpeed * deltaTime);
 }
 
-void Camera::UpdateViewMatrix() {
+void Camera::UpdateViewMatrix() 
+{
 	m_ViewMat = glm::lookAt(
 		m_transform->GetPosition(),
 		m_transform->GetPosition() + m_transform->foward,

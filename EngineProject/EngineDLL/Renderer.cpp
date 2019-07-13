@@ -97,7 +97,8 @@ void Renderer::BindBuffer(unsigned int bufferID, int size, int bufferEnableIndex
 		(void*)0            // desfase del buffer
 	);
 }
-void Renderer::BindBuffer(unsigned int bufferID) {
+void Renderer::BindBuffer(unsigned int bufferID) 
+{
 	glBindBuffer(GL_ARRAY_BUFFER, bufferID);
 }
 

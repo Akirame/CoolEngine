@@ -3,7 +3,8 @@
 #include "Mesh.h"
 #include "Transform.h"
 
-Sword::Sword(Renderer* renderer) : EntityNode(renderer) {
+Sword::Sword(Renderer* renderer) : EntityNode(renderer) 
+{
 	material = new Material();
 	mesh = new Mesh(this,renderer);
 	mesh->SetMaterial(material);
@@ -16,6 +17,7 @@ Sword::Sword(Renderer* renderer) : EntityNode(renderer) {
 Sword::~Sword() {
 }
 
-void Sword::Update(float deltaTime) {
+void Sword::Update(float deltaTime) 
+{
 	EntityNode::Update(deltaTime);
 }

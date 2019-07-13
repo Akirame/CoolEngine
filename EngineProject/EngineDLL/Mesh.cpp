@@ -66,20 +66,23 @@ void Mesh::BindMaterial()
 	m_renderer->BindMaterial(programID);
 }
 
-void Mesh::Update(float deltaTime) {
+void Mesh::Update(float deltaTime) 
+{
 	Draw();
 }
 
 
 
-bool Mesh::LoadModel(const char* filePath) {
+bool Mesh::LoadModel(const char* filePath) 
+{
 	if (!LoadModelWithAssimp(filePath))
 		return false;
 	cout << conta;
 	return true;
 }
 
-bool Mesh::LoadModelWithAssimp(const char* filePath) {
+bool Mesh::LoadModelWithAssimp(const char* filePath) 
+{
 	Assimp::Importer importer;
 
 	const aiScene* scene = importer.ReadFile(filePath, aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -93,14 +96,16 @@ bool Mesh::LoadModelWithAssimp(const char* filePath) {
 	ProcessMesh(scene->mMeshes[0]);
 	GenerateBuffers();
 
-	for (int i = 1; i < scene->mNumMeshes; i++) {
+	for (int i = 1; i < scene->mNumMeshes; i++) 
+	{
 		ProcessNode(scene->mRootNode, scene, i);
 	}
 	printf("SUCCESS\n");
 	printf("%d different meshes found in %s\n", scene->mNumMeshes, filePath);
 }
 
-void Mesh::ProcessNode(aiNode* node, const aiScene* scene, int& nodeIndex) {	
+void Mesh::ProcessNode(aiNode* node, const aiScene* scene, int& nodeIndex) 
+{	
 	conta++;
 	EntityNode* entity = new EntityNode(m_renderer);
 	Mesh* mesh = new Mesh(entity, m_renderer);
@@ -111,20 +116,24 @@ void Mesh::ProcessNode(aiNode* node, const aiScene* scene, int& nodeIndex) {
 	entity->AddComponent(mesh);
 	m_entity->AddNode(entity);
 
-	for (nodeIndex; nodeIndex < node->mNumChildren; nodeIndex++) {
+	for (nodeIndex; nodeIndex < node->mNumChildren; nodeIndex++) 
+	{
 		ProcessNode(node->mChildren[nodeIndex], scene, nodeIndex);
 	}
 }
 
-void Mesh::ProcessMesh(aiMesh* mesh) {	
+void Mesh::ProcessMesh(aiMesh* mesh) 
+{	
 	FillVBOinfo(mesh);
 	FillFaceIndices(mesh);
 }
 
-void Mesh::FillVBOinfo(aiMesh* mesh) {
+void Mesh::FillVBOinfo(aiMesh* mesh) 
+{
 	m_indexedVertices.reserve(mesh->mNumVertices);
 	m_indexedUVs.reserve(mesh->mNumVertices);
-	for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
+	for (unsigned int i = 0; i < mesh->mNumVertices; i++) 
+	{
 		aiVector3D pos = mesh->mVertices[i];
 		m_indexedVertices.push_back(pos.x);
 		m_indexedVertices.push_back(pos.y);
@@ -136,16 +145,19 @@ void Mesh::FillVBOinfo(aiMesh* mesh) {
 	}
 }
 
-void Mesh::FillFaceIndices(aiMesh* mesh) {
+void Mesh::FillFaceIndices(aiMesh* mesh) 
+{
 	m_indices.reserve(3 * mesh->mNumFaces);
-	for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
+	for (unsigned int i = 0; i < mesh->mNumFaces; i++) 
+	{
 		m_indices.push_back(mesh->mFaces[i].mIndices[0]);
 		m_indices.push_back(mesh->mFaces[i].mIndices[1]);
 		m_indices.push_back(mesh->mFaces[i].mIndices[2]);
 	}
 }
 
-void Mesh::GenerateBuffers() {
+void Mesh::GenerateBuffers() 
+{
 	vector<float> indexedVertices;
 	vector<float> indexedUVs;
 	m_vertexBuffer = m_renderer->GenBuffer(&m_indexedVertices[0], m_indexedVertices.size() * sizeof(float));
