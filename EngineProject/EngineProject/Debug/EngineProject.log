@@ -67,7 +67,7 @@ c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.
           [
               _Ty=Component *
           ]
-c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(25): warning C4251: 'Mesh::models': class 'std::vector<ModelData,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Mesh'
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(31): warning C4251: 'Mesh::models': class 'std::vector<ModelData,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Mesh'
           with
           [
               _Ty=ModelData
@@ -76,6 +76,36 @@ c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(25)
           with
           [
               _Ty=ModelData
+          ]
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(46): warning C4251: 'Mesh::m_indices': class 'std::vector<unsigned int,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Mesh'
+          with
+          [
+              _Ty=unsigned int
+          ]
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\definitions.h(8): note: vea la declaración de 'std::vector<unsigned int,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=unsigned int
+          ]
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(47): warning C4251: 'Mesh::m_indexedVertices': class 'std::vector<glm::vec3,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Mesh'
+          with
+          [
+              _Ty=glm::vec3
+          ]
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(47): note: vea la declaración de 'std::vector<glm::vec3,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=glm::vec3
+          ]
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(48): warning C4251: 'Mesh::m_indexedUVs': class 'std::vector<glm::vec2,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Mesh'
+          with
+          [
+              _Ty=glm::vec2
+          ]
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(48): note: vea la declaración de 'std::vector<glm::vec2,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=glm::vec2
           ]
   main.cpp
 c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\renderer.h(12): warning C4251: 'Renderer::model': struct 'glm::mat<4,4,float,0>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Renderer'
@@ -146,7 +176,7 @@ c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.
           [
               _Ty=Component *
           ]
-c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(25): warning C4251: 'Mesh::models': class 'std::vector<ModelData,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Mesh'
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(31): warning C4251: 'Mesh::models': class 'std::vector<ModelData,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Mesh'
           with
           [
               _Ty=ModelData
@@ -155,6 +185,36 @@ c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(25)
           with
           [
               _Ty=ModelData
+          ]
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(46): warning C4251: 'Mesh::m_indices': class 'std::vector<unsigned int,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Mesh'
+          with
+          [
+              _Ty=unsigned int
+          ]
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\definitions.h(8): note: vea la declaración de 'std::vector<unsigned int,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=unsigned int
+          ]
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(47): warning C4251: 'Mesh::m_indexedVertices': class 'std::vector<glm::vec3,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Mesh'
+          with
+          [
+              _Ty=glm::vec3
+          ]
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(47): note: vea la declaración de 'std::vector<glm::vec3,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=glm::vec3
+          ]
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(48): warning C4251: 'Mesh::m_indexedUVs': class 'std::vector<glm::vec2,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'Mesh'
+          with
+          [
+              _Ty=glm::vec2
+          ]
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(48): note: vea la declaración de 'std::vector<glm::vec2,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=glm::vec2
           ]
   Generando código...
   EngineProject.vcxproj -> C:\Users\gsvil\Documents\Proyectos\CoolEngine\EngineProject\Debug\EngineProject.exe

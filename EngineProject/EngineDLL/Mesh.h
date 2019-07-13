@@ -8,12 +8,15 @@
 class Renderer;
 class Material;
 class EntityNode;
+struct aiMesh;
+struct aiNode;
+struct aiScene;
 
 class ENGINEDLL_API Mesh :
 	public Component
 {
 public:
-	Mesh(EntityNode* entity, Renderer* _renderer, const char* modelPath);
+	Mesh(EntityNode* entity, Renderer* _renderer);
 	~Mesh();
 	void Draw();
 	virtual void SetMaterial(Material* _material);
@@ -21,20 +24,26 @@ public:
 	void BindMaterial();
 	void SetTexture(const char * imagepath);	
 	void Update(float deltaTime) override;
+	bool LoadModel(const char* filePath);
+	void ProcessMesh(aiMesh* mesh);
+	void GenerateBuffers();
 protected:
 	std::vector<ModelData> models;
-	Material* material;
-	Renderer* renderer;
-	unsigned int bufferData;
-	unsigned int bufferColor;
-	unsigned int bufferIndex;
+	Material* m_material;
+	Renderer* m_renderer;
 	unsigned int programID;
-	float* vertices;
-	float* verticesUVArray;
-	ModelData mesh;
-	unsigned int verticesUV;
-	unsigned int* indexes;
 	bool shouldDispose;
 	unsigned int texture;
-};
+	void FillVBOinfo(aiMesh* mesh);
+	void FillFaceIndices(aiMesh* mesh);
+	bool LoadModelWithAssimp(const char* filePath);
+	void ProcessNode(aiNode* node, const aiScene* scene, int& nodeIndex);
 
+	unsigned int m_vertexBuffer;
+	unsigned int m_uvBuffer;	
+	unsigned int m_elementsBuffer;
+
+	std::vector<unsigned int> m_indices;
+	std::vector<glm::vec3> m_indexedVertices;
+	std::vector<glm::vec2> m_indexedUVs;
+};

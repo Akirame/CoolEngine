@@ -66,3 +66,6 @@ ModelData ModelImporter::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 		return aux;
 }
 
+
+
+

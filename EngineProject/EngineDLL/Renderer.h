@@ -32,9 +32,12 @@ public:
 	void ClearScreen();
 	void SwapBuffers();
 	unsigned int GenBuffer(float* buffer, int size);	
+	unsigned int GenBuffer(glm::vec3* buffer, int size);
+	unsigned int GenBuffer(glm::vec2* buffer, int size);
 	void Draw(int vtxCount,DrawTypes typeOfDraw);
 	void EnableBuffer(int bufferEnableIndex);
 	void BindBuffer(unsigned int bufferID, int size, int bufferEnableIndex);
+	void BindBuffer(unsigned int bufferID);
 	void DisableBuffer(int bufferDisableIndex);
 	void DeleteBuffers(unsigned int _buffer);
 	void BindMaterial(unsigned int programID);
@@ -48,9 +51,10 @@ public:
 	void SetViewMatrix(glm::vec3 pos, glm::vec3 lookAt, glm::vec3 up);
 	void SetCameraType(ViewTypes set);
 	unsigned int GenBufferIndex(unsigned int* buffer, int size);
+	unsigned int GenElementsBuffer(unsigned int* buffer, int size);
 	void DrawIndex(int vtxCount);
 	void BindBufferIndex(unsigned int bufferID);
-	void BindMeshBuffer(unsigned int indexbuffer);
-	void DrawIndexBuffer(int indexcount);
+	void BindElementBuffer(unsigned int indexbuffer);
+	void DrawElements(int indexcount);
 };
 

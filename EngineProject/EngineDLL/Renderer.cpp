@@ -66,6 +66,27 @@ unsigned int Renderer::GenBuffer(float* buffer, int size)
  	glBufferData(GL_ARRAY_BUFFER, size, buffer, GL_STATIC_DRAW);
 	return vertexbuffer;
 }
+
+unsigned int Renderer::GenBuffer(glm::vec3* buffer, int size) {
+	unsigned int vrtxBuffer;
+
+	glGenBuffers(1, &vrtxBuffer);									// Generates buffer using vrtxBuffer
+	glBindBuffer(GL_ARRAY_BUFFER, vrtxBuffer);						// Bind openGL with vrtxBuffer
+	glBufferData(GL_ARRAY_BUFFER, size, buffer, GL_STATIC_DRAW);	// OpenGL recieves buffer data
+
+	return vrtxBuffer;
+}
+
+unsigned int Renderer::GenBuffer(glm::vec2* buffer, int size) {
+	unsigned int vrtxBuffer;
+
+	glGenBuffers(1, &vrtxBuffer);									// Generates buffer using vrtxBuffer
+	glBindBuffer(GL_ARRAY_BUFFER, vrtxBuffer);						// Bind openGL with vrtxBuffer
+	glBufferData(GL_ARRAY_BUFFER, size, buffer, GL_STATIC_DRAW);	// OpenGL recieves buffer data
+
+	return vrtxBuffer;
+}
+
 unsigned int Renderer::GenBufferIndex(unsigned int* buffer, int size)
 {
 	unsigned int IBO;
@@ -77,6 +98,15 @@ unsigned int Renderer::GenBufferIndex(unsigned int* buffer, int size)
 
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, buffer, GL_STATIC_DRAW);
 	return IBO;
+}
+unsigned int Renderer::GenElementsBuffer(unsigned int* buffer, int size) {
+	unsigned int vrtxBuffer;
+
+	glGenBuffers(1, &vrtxBuffer);									// Generates buffer using vrtxBuffer
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vrtxBuffer);						// Bind openGL with vrtxBuffer
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, buffer, GL_STATIC_DRAW);	// OpenGL recieves buffer data
+
+	return vrtxBuffer;
 }
 void Renderer::DrawIndex(int vtxCount)
 {
@@ -106,13 +136,17 @@ void Renderer::BindBuffer(unsigned int bufferID, int size, int bufferEnableIndex
 		(void*)0            // desfase del buffer
 	);
 }
-void Renderer::BindMeshBuffer(unsigned int indexbuffer)
+void Renderer::BindBuffer(unsigned int bufferID) {
+	glBindBuffer(GL_ARRAY_BUFFER, bufferID);
+}
+
+void Renderer::BindElementBuffer(unsigned int indexbuffer)
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexbuffer);
 
 }
 
-void Renderer::DrawIndexBuffer(int indexcount)
+void Renderer::DrawElements(int indexcount)
 {
 	glDrawElements(
 		GL_TRIANGLES,
