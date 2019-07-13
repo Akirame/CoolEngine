@@ -7,14 +7,13 @@ Scene::Scene(Renderer* renderer, Camera* _camera) : EntityNode(renderer) {
 
 bool Scene::Start() {
 	sw1 = new Sword(m_renderer);	
-	sw1->GetTransform()->SetPosition(-3, 0, 0);
+	sw1->GetTransform()->SetPosition(0, -5, -5);
 	AddNode(sw1);
 	return true;
 }
 
 void Scene::Update(float deltaTime) {
-	rotationSpeed += 30 * deltaTime;
-	sw1->GetTransform()->SetRotX(rotationSpeed);
+	rotationSpeed += 30 * deltaTime;	
 
 
 	SceneNode::Update(deltaTime);

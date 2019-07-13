@@ -44,8 +44,8 @@ protected:
 	unsigned int m_elementsBuffer;
 
 	std::vector<unsigned int> m_indices;
-	std::vector<glm::vec3> m_indexedVertices;
-	std::vector<glm::vec2> m_indexedUVs;
+	std::vector<float> m_indexedVertices;
+	std::vector<float> m_indexedUVs;
 	const char* m_texturePath;
 	int conta = 0;
 };

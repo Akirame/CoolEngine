@@ -126,10 +126,13 @@ void Mesh::FillVBOinfo(aiMesh* mesh) {
 	m_indexedUVs.reserve(mesh->mNumVertices);
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
 		aiVector3D pos = mesh->mVertices[i];
-		m_indexedVertices.push_back(glm::vec3(pos.x, pos.y, pos.z));
+		m_indexedVertices.push_back(pos.x);
+		m_indexedVertices.push_back(pos.y);
+		m_indexedVertices.push_back(pos.z);
 
 		aiVector3D UVW = mesh->mTextureCoords[0][i]; // Assume only 1 set of UV coords; AssImp supports 8 UV sets.
-		m_indexedUVs.push_back(glm::vec2(UVW.x, UVW.y));
+		m_indexedUVs.push_back(UVW.x);
+		m_indexedUVs.push_back(UVW.y);
 	}
 }
 
@@ -143,7 +146,9 @@ void Mesh::FillFaceIndices(aiMesh* mesh) {
 }
 
 void Mesh::GenerateBuffers() {
-	m_vertexBuffer = m_renderer->GenBuffer(&m_indexedVertices[0], m_indexedVertices.size() * sizeof(glm::vec3));
-	m_uvBuffer = m_renderer->GenBuffer(&m_indexedUVs[0], m_indexedUVs.size() * sizeof(glm::vec2));	
-	m_elementsBuffer = m_renderer->GenElementsBuffer(&m_indices[0], m_indices.size() * sizeof(unsigned int));
+	vector<float> indexedVertices;
+	vector<float> indexedUVs;
+	m_vertexBuffer = m_renderer->GenBuffer(&m_indexedVertices[0], m_indexedVertices.size() * sizeof(float));
+	m_uvBuffer = m_renderer->GenBuffer(&m_indexedUVs[0], m_indexedUVs.size() * sizeof(float));	
+	m_elementsBuffer = m_renderer->GenBufferIndex(&m_indices[0], m_indices.size() * sizeof(unsigned int));
 }

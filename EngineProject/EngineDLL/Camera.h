@@ -1,40 +1,34 @@
 #pragma once
-#include "Entity.h"
+#include <iostream>
+
 #include "Exports.h"
 #include "Window.h"
-#include <glm\glm.hpp>
-#include <glm\matrix.hpp>
-#include <iostream>
-using namespace std;
-class ENGINEDLL_API Camera : public Entity
-{
+#include "Renderer.h"
+#include "EntityNode.h"
+#include "Transform.h"
+
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
+class ENGINEDLL_API Camera : public EntityNode {
 private:
-	float moveSpeed = 30.0f;
-	float rotSpeed = 3.0f;
-	glm::vec4 forward;
-	glm::vec4 up;	
-	glm::vec4 right;
-	glm::vec4 targetForward;	
-	glm::vec4 targetUp;
-	glm::vec4 targetRight;
-	glm::vec4 finalPos;
-	glm::vec4 vecConverter;	
+	Renderer * m_Renderer;
+	Window* m_Window;
+
+	glm::vec3 m_CameraTarget;
+	glm::mat4 m_ViewMat;
+
+	float m_strafeSpeed;
+	float m_RotationSpeed;
+
+	void UpdateViewMatrix();
+	void CheckForMovementInput(float deltaTime);
+	void CheckForRotationInput(float deltaTime);
+
 public:
-	Camera(Renderer* _renderer);
-	~Camera();
-	void OnUpdate(float deltaTime) override;
-	virtual void OnCollision() override {};
-	virtual void Draw() override {};
-	void Walk(float velocity);
-	void Strafe(float velocity);
-	void Pitch(float velocity);
-	void Yaw(float velocity);
-	void Roll(float velocity);
-	void MoveIn(float x, float y);
-	void SetRotateX(float x);
-	void SetRotateY(float y);
-	void SetRotateZ(float z);
-	void UpdateModelMatrix();
-	void SetPosition(const glm::vec3& worldPos);
+	Camera(Renderer* renderer, Window* window);
+	~Camera() { }
+
+	void Update(float deltaTime) override;
 };
 

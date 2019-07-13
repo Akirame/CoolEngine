@@ -19,12 +19,12 @@ bool GameBase::Start()
 	{
 		return false;
 	}
-	renderer = new Renderer(window,Renderer::PERSPECTIVE);
+	renderer = new Renderer(window);
 	if (!renderer->Start())
 	{
 		return false;
 	}
-	camera = new Camera(renderer);
+	camera = new Camera(renderer,window);
 	return OnStart();
 }
 bool GameBase::Stop()

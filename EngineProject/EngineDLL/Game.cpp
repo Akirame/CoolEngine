@@ -15,8 +15,10 @@ bool Game::OnStart()
 {
 	scene = new Scene(renderer, camera);
 	if (!scene->Start())
-		return false;
-	camera->SetPosition(glm::vec3(0,0,5));
+		return false;	
+	if(camera)
+	camera->GetTransform()->SetPosition(0, 0, 5);
+
 	return true;
 }
 
@@ -28,6 +30,6 @@ bool Game::OnStop()
 bool Game::OnUpdate(float deltaTime)
 {				
 	scene->Update(deltaTime);
-	camera->OnUpdate(deltaTime);
+	camera->Update(deltaTime);
 	return true;
 }

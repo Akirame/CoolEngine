@@ -19,7 +19,7 @@ public:
 	~Window();
 	bool Start();
 	bool Stop();
-	const void* GetWindowPrt() { return window;};
+	const void* GetWindowPtr() { return window;};
 	bool ShouldClose();
 	void PollEvents();
 };
