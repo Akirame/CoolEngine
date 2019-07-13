@@ -7,8 +7,9 @@ Sword::Sword(Renderer* renderer) : EntityNode(renderer) {
 	material = new Material();
 	mesh = new Mesh(this,renderer);
 	mesh->SetMaterial(material);
-	mesh->SetTexture("sword.bmp");
-	mesh->LoadModel("sword.obj");
+
+	mesh->SetTexture("uvtemplate.bmp");
+	mesh->LoadModel("crysis.obj");
 	AddComponent(mesh);
 }
 

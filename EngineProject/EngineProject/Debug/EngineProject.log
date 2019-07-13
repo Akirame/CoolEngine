@@ -47,22 +47,22 @@ c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\camera.h(2
   c:\users\gsvil\documents\proyectos\coolengine\engineproject\external\glm-0.9.9.0\glm\detail\type_vec.hpp(335): note: vea la declaración de 'glm::vec<4,float,0>'
 c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\gamebase.h(16): warning C4251: 'GameBase::screenName': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'GameBase'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xstring(4273): note: vea la declaración de 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(17): warning C4251: 'SceneNode::m_nodeList': class 'std::list<SceneNode *,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'SceneNode'
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(17): warning C4251: 'SceneNode::m_children': class 'std::vector<SceneNode *,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'SceneNode'
           with
           [
               _Ty=SceneNode *
           ]
-  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(17): note: vea la declaración de 'std::list<SceneNode *,std::allocator<_Ty>>'
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(17): note: vea la declaración de 'std::vector<SceneNode *,std::allocator<_Ty>>'
           with
           [
               _Ty=SceneNode *
           ]
-c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(18): warning C4251: 'SceneNode::m_componentList': class 'std::list<Component *,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'SceneNode'
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(18): warning C4251: 'SceneNode::m_componentList': class 'std::vector<Component *,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'SceneNode'
           with
           [
               _Ty=Component *
           ]
-  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(18): note: vea la declaración de 'std::list<Component *,std::allocator<_Ty>>'
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(18): note: vea la declaración de 'std::vector<Component *,std::allocator<_Ty>>'
           with
           [
               _Ty=Component *
@@ -156,22 +156,22 @@ c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\camera.h(2
   c:\users\gsvil\documents\proyectos\coolengine\engineproject\external\glm-0.9.9.0\glm\detail\type_vec.hpp(335): note: vea la declaración de 'glm::vec<4,float,0>'
 c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\gamebase.h(16): warning C4251: 'GameBase::screenName': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'GameBase'
   c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xstring(4273): note: vea la declaración de 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
-c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(17): warning C4251: 'SceneNode::m_nodeList': class 'std::list<SceneNode *,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'SceneNode'
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(17): warning C4251: 'SceneNode::m_children': class 'std::vector<SceneNode *,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'SceneNode'
           with
           [
               _Ty=SceneNode *
           ]
-  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(17): note: vea la declaración de 'std::list<SceneNode *,std::allocator<_Ty>>'
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(17): note: vea la declaración de 'std::vector<SceneNode *,std::allocator<_Ty>>'
           with
           [
               _Ty=SceneNode *
           ]
-c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(18): warning C4251: 'SceneNode::m_componentList': class 'std::list<Component *,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'SceneNode'
+c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(18): warning C4251: 'SceneNode::m_componentList': class 'std::vector<Component *,std::allocator<_Ty>>' necesita tener una interfaz DLL para que la utilicen los clientes de class 'SceneNode'
           with
           [
               _Ty=Component *
           ]
-  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(18): note: vea la declaración de 'std::list<Component *,std::allocator<_Ty>>'
+  c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\scenenode.h(18): note: vea la declaración de 'std::vector<Component *,std::allocator<_Ty>>'
           with
           [
               _Ty=Component *

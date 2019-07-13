@@ -2,7 +2,7 @@
 #include "Transform.h"
 
 EntityNode::EntityNode(Renderer* _renderer) {
-	renderer = _renderer;
+	m_renderer = _renderer;
 	m_transform = new Transform(this);
 	AddComponent(m_transform);
 }

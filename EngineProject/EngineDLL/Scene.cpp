@@ -6,7 +6,7 @@ Scene::Scene(Renderer* renderer, Camera* _camera) : EntityNode(renderer) {
 }
 
 bool Scene::Start() {
-	sw1 = new Sword(renderer);	
+	sw1 = new Sword(m_renderer);	
 	sw1->GetTransform()->SetPosition(-3, 0, 0);
 	AddNode(sw1);
 	return true;

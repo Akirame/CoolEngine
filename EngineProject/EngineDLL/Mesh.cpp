@@ -24,30 +24,34 @@ Mesh::~Mesh()
 }
 void Mesh::SetTexture(const char * imagepath)
 {
+	m_texturePath = imagepath;
 	texture = TextureImporter::loadBMP_custom(imagepath);
 }
 void Mesh::Draw()
 {
 	m_renderer->SetModelMatrix(m_entity->GetTransform()->GetModelMatrix());
+	
 	if (m_material)
 	{
 		BindMaterial();
-		m_material->SetMatrixProperty("MVP", m_renderer->GetMVP());
-		m_material->SetTextureProperty("myTextureSampler", texture);;
+		m_material->SetMatrixProperty("MVP", m_renderer->GetMVP());		
+		if (texture)
+		{
+			m_material->SetTextureProperty("myTextureSampler", texture);;
+		}
 	}
 	m_renderer->EnableBuffer(0);
-	m_renderer->BindBuffer(m_vertexBuffer);
+	m_renderer->BindBuffer(m_vertexBuffer,3,0);
 
 	m_renderer->EnableBuffer(1);
-	m_renderer->BindBuffer(m_uvBuffer);
+	m_renderer->BindBuffer(m_uvBuffer,2,1);
 
 	m_renderer->BindElementBuffer(m_elementsBuffer);
 
 	m_renderer->DrawElements(m_indices.size());
 
 	m_renderer->DisableBuffer(0);
-	m_renderer->DisableBuffer(1);
-	m_renderer->DisableBuffer(2);
+	m_renderer->DisableBuffer(1);	
 }
 void Mesh::Dispose()
 {
@@ -71,6 +75,7 @@ void Mesh::Update(float deltaTime) {
 bool Mesh::LoadModel(const char* filePath) {
 	if (!LoadModelWithAssimp(filePath))
 		return false;
+	cout << conta;
 	return true;
 }
 
@@ -91,22 +96,27 @@ bool Mesh::LoadModelWithAssimp(const char* filePath) {
 	for (int i = 1; i < scene->mNumMeshes; i++) {
 		ProcessNode(scene->mRootNode, scene, i);
 	}
+	printf("SUCCESS\n");
+	printf("%d different meshes found in %s\n", scene->mNumMeshes, filePath);
 }
 
-void Mesh::ProcessNode(aiNode* node, const aiScene* scene, int& nodeIndex) {
+void Mesh::ProcessNode(aiNode* node, const aiScene* scene, int& nodeIndex) {	
+	conta++;
 	EntityNode* entity = new EntityNode(m_renderer);
 	Mesh* mesh = new Mesh(entity, m_renderer);
+	mesh->SetTexture(m_texturePath);
+	mesh->SetMaterial(m_material);
 	mesh->ProcessMesh(scene->mMeshes[nodeIndex]);
 	mesh->GenerateBuffers();
 	entity->AddComponent(mesh);
 	m_entity->AddNode(entity);
 
-	/*for (nodeIndex; nodeIndex < node->mNumChildren; nodeIndex++) {
+	for (nodeIndex; nodeIndex < node->mNumChildren; nodeIndex++) {
 		ProcessNode(node->mChildren[nodeIndex], scene, nodeIndex);
-	}*/
+	}
 }
 
-void Mesh::ProcessMesh(aiMesh* mesh) {
+void Mesh::ProcessMesh(aiMesh* mesh) {	
 	FillVBOinfo(mesh);
 	FillFaceIndices(mesh);
 }
@@ -132,21 +142,8 @@ void Mesh::FillFaceIndices(aiMesh* mesh) {
 	}
 }
 
-void Mesh::GenerateBuffers() {	
-	vector<float> indexedVertices;
-	vector<float> indexedUVs;
-	for (int i = 0; i < m_indexedVertices.size(); i++)
-	{		
-		indexedVertices.push_back(m_indexedVertices[i].x);
-		indexedVertices.push_back(m_indexedVertices[i].y);
-		indexedVertices.push_back(m_indexedVertices[i].z);
-	}
-	for (int i = 0; i < m_indexedUVs.size(); i++)
-	{
-		indexedUVs.push_back(m_indexedUVs[i].x);
-		indexedUVs.push_back(m_indexedUVs[i].y);		
-	}
-	m_vertexBuffer = m_renderer->GenBuffer(&indexedVertices[0], indexedVertices.size() * sizeof(float));
-	m_uvBuffer = m_renderer->GenBuffer(&indexedUVs[0], indexedUVs.size() * sizeof(float));
- 	m_elementsBuffer = m_renderer->GenElementsBuffer(&m_indices[0], m_indices.size() * sizeof(unsigned short));
+void Mesh::GenerateBuffers() {
+	m_vertexBuffer = m_renderer->GenBuffer(&m_indexedVertices[0], m_indexedVertices.size() * sizeof(glm::vec3));
+	m_uvBuffer = m_renderer->GenBuffer(&m_indexedUVs[0], m_indexedUVs.size() * sizeof(glm::vec2));	
+	m_elementsBuffer = m_renderer->GenElementsBuffer(&m_indices[0], m_indices.size() * sizeof(unsigned int));
 }
