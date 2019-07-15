@@ -12,7 +12,7 @@ Player::Player(Renderer* _renderer) : Sprite(_renderer)
 	dieAnimation->CreateAnimation("Die", 3, 6, false);
 	animator->AddAnimation(idleAnimation);
 	animator->AddAnimation(flyingAnimation);
-	animator->AddAnimation(dieAnimation);
+	animator->AddAnimation(dieAnimation);		
 }
 
 
@@ -26,7 +26,7 @@ void Player::OnUpdate(float deltaTime)
 	// Move UP
 	if (glfwGetKey((GLFWwindow*)renderer->window->GetWindowPrt(), GLFW_KEY_UP) == GLFW_PRESS) {
 		animator->Play("Flying", deltaTime);		
-		rigidBody->ApplyForceToCenter(1666000 * direction, true);
+		rigidBody->ApplyForceToCenter(50000 * direction, true);
 	}
 	else
 	{
@@ -46,11 +46,10 @@ void Player::OnUpdate(float deltaTime)
 	}
 	if (rigidBody)
 		SetPosition(rigidBody->GetPosition().x, rigidBody->GetPosition().y, 0);	
-	SetRotate(0, 0, angleRotation);
+	SetRotate(0, 0, angleRotation);	
 }
 void Player::CollisionCallback()
-{
-	cout << "ola: " <<rigidBody->GetLinearVelocity().x << "," << rigidBody->GetLinearVelocity().y << endl;	
+{	
 	if (CloseToZero(rigidBody->GetLinearVelocity().x) && CloseToZero(rigidBody->GetLinearVelocity().y))
 	{
 		b2Vec2 v;

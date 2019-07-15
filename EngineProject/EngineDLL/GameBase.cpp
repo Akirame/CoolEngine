@@ -53,7 +53,7 @@ void GameBase::Loop()
 		float deltaTime = glfwGetTime() - lastTime;
 		lastTime = glfwGetTime();
 
-		renderer->SetClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+		renderer->SetClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		renderer->ClearScreen();
 		aux = OnUpdate(deltaTime);
 		renderer->SwapBuffers();

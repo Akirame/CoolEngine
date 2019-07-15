@@ -23,6 +23,7 @@ protected:
 	int loopCount;
 	Material* mat;
 	Player* player;
+	Sprite* background;
 	Platform* landingPlatform;
 	b2World* world2D;
 	Tilemap* tilemap;

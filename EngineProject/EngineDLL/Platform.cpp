@@ -28,3 +28,8 @@ void Platform::SetRigidbody(b2Body * body)
 {
 	rigidBody = body;
 }
+
+b2Body * Platform::GetRigidbody()
+{
+	return rigidBody;
+}

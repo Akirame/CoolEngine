@@ -39,7 +39,7 @@ void Sprite::SetMaterial(Material* _material)
 	material = _material;
 	programID = material->LoadShaders("TextureVertexShader.txt", "TextureFragmentShader.txt");
 }
-void Sprite::SetTexture(const char * imagepath)
+void Sprite::SetTexture(const char * imagepath,bool hack)
 {
 	texture = TextureImporter::loadBMP_custom(imagepath);
 	heightFrame = 64;
@@ -47,13 +47,26 @@ void Sprite::SetTexture(const char * imagepath)
 	heightTotal = TextureImporter::dataStruct.height;
 	widthTotal = TextureImporter::dataStruct.width;
 	//offsets por la colision
-	float g_vertex_buffer_data[] = {
-		-38.0f,heightFrame+10,0.0f,
-		32,heightFrame+10,0.0f,
-		-38.0f,10.0f,0.0f,
-		32,10.0f,0.0f,
-	};
-	SetVertices(g_vertex_buffer_data, 4);
+	if (hack)
+	{
+		float g_vertex_buffer_data[] = {
+			-38.0f,heightFrame + 10,0.0f,
+			32,heightFrame + 10,0.0f,
+			-38.0f,10.0f,0.0f,
+			32,10.0f,0.0f
+		};
+		SetVertices(g_vertex_buffer_data, 4);
+	}
+	else
+	{
+		float g_vertex_buffer_data[] = {
+			0.0f,heightFrame,0.0f,
+			widthFrame,heightFrame,0.0f,
+			0.0f,0.0f,0.0f,
+			widthFrame,0.0f,0.0f
+		};
+		SetVertices(g_vertex_buffer_data, 4);
+	}	
 }
 
 void Sprite::Draw()

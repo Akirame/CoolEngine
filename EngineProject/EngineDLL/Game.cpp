@@ -26,16 +26,15 @@ bool Game::OnStart()
 
 	cout << "Game::OnStart()" << endl;
 	mat = new Material();
-	tilemap = new Tilemap(renderer, screenHeight, screenWidth);
-	tilemap->SetColliderTiles({0});
-	const b2Vec2 gravity = b2Vec2(0, -1);
+	const b2Vec2 gravity = b2Vec2(0, -10);
 	world2D = new b2World(gravity);
 	landingPlatform = new Platform(renderer);
 	player = new Player(renderer);
 	bullet1 = new Bullet(renderer);
 	turret = new Turret(renderer, world2D,player,bullet1);	
 	ground = new Line2D(renderer);	
-	
+	background = new Sprite(renderer);
+
 	b2Vec2 platPoint = b2Vec2_zero;
 	vector<b2Vec2> turretsPoint;
 	int turrets = 1;
@@ -106,6 +105,7 @@ bool Game::OnStart()
 	myBodyDef.position.Set(350, 250); //set the starting position
 	myBodyDef.angle = 90; //set the starting angle
 	myBodyDef.gravityScale = 1.0f;	
+	myBodyDef.userData = &player;
 	b2PolygonShape boxShape;
 	boxShape.SetAsBox(30, 30);		
 	b2FixtureDef boxFixtureDef;
@@ -119,6 +119,7 @@ bool Game::OnStart()
 	myBodyDefPlat.type = b2_staticBody; //this will be a static body	
 	myBodyDefPlat.angle = 0; //set the starting angle
 	myBodyDefPlat.position.Set(platPoint.x, platPoint.y);
+	myBodyDefPlat.userData = &landingPlatform;
 	b2PolygonShape boxShapePlat;
 	boxShapePlat.SetAsBox(40, 40);
 	b2FixtureDef boxFixtureDefPlat;
@@ -159,18 +160,24 @@ bool Game::OnStart()
 
 
 	
-	
+	if (background && mat)
+	{
+		background->SetMaterial(mat);
+		background->SetTexture("background.bmp",false);
+		background->SetScale(20,20, 1);		
+	}
 	if (player && mat)
 	{
 		player->SetMaterial(mat);
-		player->SetTexture("Nave.bmp");
+		player->SetTexture("Nave.bmp", true);
 		player->SetFrameType(40, 40, 7);
-		player->SetFrame(0);
+		player->SetFrame(0);		
+		player->GetRigidbody()->SetTransform(b2Vec2(3000, 200), 0);
 	}
 	if (landingPlatform && mat)
 	{
 		landingPlatform->SetMaterial(mat);
-		landingPlatform->SetTexture("Platform.bmp");
+		landingPlatform->SetTexture("Platform.bmp", true);
 		landingPlatform->SetFrameType(50,20, 4);
 		landingPlatform->SetFrame(0);
 	}
@@ -181,24 +188,17 @@ bool Game::OnStart()
 	if (turret && mat)
 	{
 		turret->SetMaterial(mat);
-		turret->SetTexture("Turret.bmp");
+		turret->SetTexture("Turret.bmp", true);
 		turret->SetFrameType(16,16, 1);
 		turret->SetFrame(1);
 	}
 	if (bullet1 && mat)
 	{
 		bullet1->SetMaterial(mat);
-		bullet1->SetTexture("Bullet.bmp");
+		bullet1->SetTexture("Bullet.bmp", true);
 		bullet1->SetFrameType(16, 16, 7);
 		bullet1->SetFrame(0);
 	}
-	if (tilemap && mat)
-	{
-		tilemap->SetMaterial(mat);
-		tilemap->SetFrameType(32, 32, 6);
-		tilemap->SetTexture("tilemap.bmp");
-	}
-	CollisionManager::GetInstance()->AddToGroup("A", player);
 
 	return true;
 }
@@ -210,16 +210,75 @@ bool Game::OnStop()
 }
 bool Game::OnUpdate(float deltaTime)
 {	
-	world2D->Step(1 / 20.0, 8, 3);
+	world2D->Step(1 / 30.0, 8, 3);
 	renderer->CameraFollow(player->GetPos());
 	conta += deltaTime * 1;
 	turret->Draw();
 	turret->OnUpdate(deltaTime);
 	player->OnUpdate(deltaTime);
 	landingPlatform->OnUpdate(deltaTime);
-	player->Draw();
+	player->Draw();		
 	landingPlatform->Draw();
 	ground->Draw();
+	for (b2ContactEdge* ce = landingPlatform->GetRigidbody()->GetContactList(); ce; ce = ce->next)
+	{
+		b2Contact* c = ce->contact;
+		b2Body* pbodyA = c->GetFixtureA()->GetBody();
+		b2Body* pbodyB = c->GetFixtureB()->GetBody();
+		if (pbodyA->GetUserData() != NULL && pbodyB->GetUserData() != NULL)
+		{
+			if (player->GetRigidbody()->GetUserData() == pbodyA->GetUserData())
+			{
+				if (pbodyA->GetLinearVelocity().y < -10.0f) {
+					cout << pbodyA->GetLinearVelocity().y << endl;
+					pbodyA->SetTransform(b2Vec2(3000, 200), 0);
+					pbodyA->SetLinearVelocity(b2Vec2_zero);
+				}
+				else
+				{
+					cout << pbodyA->GetLinearVelocity().y << endl;
+					cout << ">YOU WIN<" << endl;					
+				}
+			}
+			else if (player->GetRigidbody()->GetUserData() == pbodyB->GetUserData())
+			{
+				if (pbodyB->GetLinearVelocity().y < -28.0f) {
+					cout << pbodyB->GetLinearVelocity().y << endl;
+					pbodyB->SetTransform(b2Vec2(3000, 200), 0);
+					pbodyB->SetLinearVelocity(b2Vec2_zero);
+				}
+				else
+				{
+					cout << ">YOU WIN<" << endl;					
+				}
+			}
+		}
+	}
+	for (b2ContactEdge* ce = ground->GetRigidbody()->GetContactList(); ce; ce = ce->next)
+	{
+		b2Contact* c = ce->contact;
+		b2Body* pbodyA = c->GetFixtureA()->GetBody();
+		b2Body* pbodyB = c->GetFixtureB()->GetBody();
+		if (pbodyA->GetUserData() != NULL && pbodyB->GetUserData() != NULL)
+		{
+			if (player->GetRigidbody()->GetUserData() == pbodyA->GetUserData())
+			{
+				if (pbodyA->GetLinearVelocity().y < -28.0f) {
+					cout << pbodyA->GetLinearVelocity().y << endl;
+					pbodyA->SetTransform(b2Vec2(3000, 200), 0);
+					pbodyA->SetLinearVelocity(b2Vec2_zero);
+				}
+			}
+			else if (player->GetRigidbody()->GetUserData() == pbodyB->GetUserData())
+			{
+				if (pbodyB->GetLinearVelocity().y < -28.0f) {
+					cout << pbodyB->GetLinearVelocity().y << endl;
+					pbodyB->SetTransform(b2Vec2(3000, 200), 0);
+					pbodyB->SetLinearVelocity(b2Vec2_zero);
+				}
+			}
+		}
+	}
 	if (loopCount > 10000)
 	{		
 		return false;

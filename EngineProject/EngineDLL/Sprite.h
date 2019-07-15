@@ -10,7 +10,7 @@ public:
 	Sprite(Renderer * _renderer);
 	~Sprite();
 	void Draw() override;
-	void SetTexture(const char * imagepath);
+	void SetTexture(const char * imagepath,bool hack);
 	void SetMaterial(Material* _material) override;
 	void SetVerticesUV(float* vertices);
 	void SetFrame(unsigned int id);
