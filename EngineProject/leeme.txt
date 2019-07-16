@@ -1,0 +1,3 @@
+GetChild(int index) para elegir a los childs y probar los transforms, la clase swords ya esta instanciada y deje un rar con algunos obj por si no querés descargar alguno.
+ASWD moverse, RF para subir o bajar y flechas para mover la cámara
+Tuve problemas con los UV's, probé muchas cosas y no pude encontrar que es lo que pasa, ya que no veo nada mas raro que agarrar los indices y crear el buffer como hicimos con el 2D.

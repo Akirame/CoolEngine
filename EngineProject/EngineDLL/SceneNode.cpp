@@ -67,7 +67,7 @@ Transform* SceneNode::GetTransform()
 	return transform;
 }
 
-SceneNode* SceneNode::GetChildrenByIndex(int index) 
+SceneNode* SceneNode::GetChild(int index) 
 {
 	if (index >= 0 && index < children.size())
 		return children[index];

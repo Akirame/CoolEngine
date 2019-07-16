@@ -137,9 +137,9 @@ void Mesh::FillVBOinfo(aiMesh* mesh)
 		indexedVertices.push_back(pos.y);
 		indexedVertices.push_back(pos.z);
 
-		aiVector3D UVW = mesh->mTextureCoords[0][i]; // Assume only 1 set of UV coords; AssImp supports 8 UV sets.
-		indexedUVs.push_back(UVW.x);
-		indexedUVs.push_back(UVW.y);
+		aiVector3D UVs = mesh->mTextureCoords[0][i]; // Assume only 1 set of UV coords; AssImp supports 8 UV sets.
+		indexedUVs.push_back(UVs.x);
+		indexedUVs.push_back(UVs.y);
 	}
 }
 

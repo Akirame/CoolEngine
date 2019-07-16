@@ -32,5 +32,5 @@ public:
 
 	SceneNode* GetParent();
 	Transform* GetTransform();
-	SceneNode* GetChildrenByIndex(int index);
+	SceneNode* GetChild(int index);
 };

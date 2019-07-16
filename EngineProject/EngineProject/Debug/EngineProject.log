@@ -189,4 +189,5 @@ c:\users\gsvil\documents\proyectos\coolengine\engineproject\enginedll\mesh.h(48)
               _Ty=float
           ]
   Generando código...
+  LINK : no se encontró C:\Users\gsvil\Documents\Proyectos\CoolEngine\EngineProject\Debug\EngineProject.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
   EngineProject.vcxproj -> C:\Users\gsvil\Documents\Proyectos\CoolEngine\EngineProject\Debug\EngineProject.exe
